@@ -1,0 +1,10 @@
+**/*.md
+lib
+es
+.umi
+.gitignore
+coverage
+gulpfile.js
+
+package.json
+tsconfig.json

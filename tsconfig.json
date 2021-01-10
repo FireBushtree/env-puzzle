@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "envd": ["src"],
+      "@/src/*": ["src/*"]
+    },
+    "declaration": true,
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+    ],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "noUnusedLocals": true,
+    "target": "es6",
+    "lib": ["dom", "es2017"],
+    "skipLibCheck": true,
+  },
+  "exclude": ["node_modules", "lib", "es"]
+}

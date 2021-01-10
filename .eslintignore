@@ -1,0 +1,9 @@
+lib
+es
+node_modules
+scr/.umi
+gulpfile.js
+.fatherrc.ts
+.huskyrc.js
+.lintstagedrc.js
+.umirc.ts
