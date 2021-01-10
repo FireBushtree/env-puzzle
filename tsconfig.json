@@ -18,5 +18,6 @@
     "lib": ["dom", "es2017"],
     "skipLibCheck": true,
   },
+  "include": ["src"],
   "exclude": ["node_modules", "lib", "es"]
 }
