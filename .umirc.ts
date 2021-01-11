@@ -31,7 +31,7 @@ export default defineConfig({
     '/component': [
       {
         title: '组件',
-        children: ['table/index.md', 'scroll/index.md'],
+        children: ['table/index.md', 'scroll/index.md', 'percent/index.md'],
       },
     ],
   },
