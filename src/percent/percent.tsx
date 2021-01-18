@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classnames from 'classnames';
 
 export interface PercentProps {
   className?: string;
@@ -51,7 +52,7 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
     const perValue = 100 / total;
     const activeCount = Math.floor(value / perValue);
 
-    for (let i = 0; i <= total; i++) {
+    const renderColumn = (i: number, color: string) => {
       ctx.beginPath();
       const currentAngle = angle * i;
       ctx.moveTo(
@@ -66,9 +67,26 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       ctx.shadowBlur = 0;
       ctx.lineWidth = 3;
       ctx.lineCap = 'round';
-      ctx.strokeStyle = i > activeCount ? '#cccccc' : THEME_COLOR;
+      ctx.strokeStyle = color;
       ctx.stroke();
+    };
+
+    for (let i = 0; i <= total; i++) {
+      renderColumn(i, '#ccc');
     }
+
+    let currentActiveCount = 0;
+    const renderActiveColumn = () => {
+      if (currentActiveCount <= activeCount) {
+        renderColumn(currentActiveCount, THEME_COLOR);
+        currentActiveCount += 1;
+        setTimeout(() => {
+          renderActiveColumn();
+        }, 100);
+      }
+    };
+
+    renderActiveColumn();
 
     // 渲染文字
     ctx.font = `bold 18px Arial`;
@@ -86,39 +104,16 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
     ctx.textAlign = 'right';
     ctx.fillText('100%', canvasWidth - padding, circleCenterY + 14);
     ctx.textAlign = 'start';
-
-    // 渲染中间的长方形
-    const valueContainerWidth = Math.floor(ctx.canvas.width * 0.25);
-    const valueContainerHeight = Math.floor(valueContainerWidth * 0.6);
-    const valueContainerBeginX = (ctx.canvas.width - valueContainerWidth) / 2;
-    const valueContainerBeginY =
-      circleCenterY - valueContainerHeight - canvasHeight * 0.02; // 搞点距离远一点
-
-    ctx.beginPath();
-    ctx.lineJoin = 'round';
-    ctx.strokeStyle = THEME_COLOR;
-    ctx.lineWidth = 1;
-    ctx.strokeRect(
-        valueContainerBeginX,
-        valueContainerBeginY,
-        valueContainerWidth,
-        valueContainerHeight,
-    );
-
-    // 渲染值
-    ctx.beginPath();
-    ctx.fillStyle = '#ffffff';
-    const valueText = value + '%';
-    ctx.fillText(
-        valueText,
-        circleCenterX - ctx.measureText(valueText).width / 2,
-        circleCenterY - valueContainerHeight / 2, // 搞点距离远一点
-    );
   }, [wrapRef]);
 
   return (
-    <div className={className} style={style} ref={wrapRef}>
+    <div
+      className={classnames(className, 'env-percent-semicircle')}
+      style={style}
+      ref={wrapRef}
+    >
       <canvas ref={canvasRef}></canvas>
+      <div className="env-percent-semicircle__value">{value}%</div>
     </div>
   );
 };

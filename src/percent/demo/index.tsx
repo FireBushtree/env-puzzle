@@ -5,8 +5,8 @@ const PercentDemo: React.FC = () => {
   return (
     <div
       style={{
-        width: 364,
-        height: 266,
+        width: 192,
+        height: 140,
         background: '#000',
         display: 'flex',
         flexDirection: 'column',
