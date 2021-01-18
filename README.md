@@ -1,4 +1,4 @@
-# envd
+# env-puzzle
 
 ## How to contribute
 

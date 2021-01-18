@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import * as React from 'react';
-import {Table} from 'envd';
+import {Table} from 'env-puzzle';
 
 class User {
   key: number;

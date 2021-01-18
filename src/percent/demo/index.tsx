@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Percent} from 'envd';
+import {Percent} from 'env-puzzle';
 
 const PercentDemo: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Table} from 'envd';
+import {Table} from 'env-puzzle';
 
 const TableDemo: React.FC = () => {
   const dataSource = [

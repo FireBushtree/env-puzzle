@@ -3,7 +3,7 @@ const rimraf = require('rimraf');
 const fs = require('fs');
 const path = require('path');
 
-const TYPEINGS_FOLDER = 'envd-typings';
+const TYPEINGS_FOLDER = 'env-puzzle-typings';
 const typeRootDir = path.resolve(__dirname, `../${TYPEINGS_FOLDER}`);
 const libRootDir = path.resolve(__dirname, '../es');
 const esRootDir = path.resolve(__dirname, '../lib');

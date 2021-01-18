@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Scroll} from 'envd';
+import {Scroll} from 'env-puzzle';
 
 const ScrollDemo: React.FC = () => {
   return (

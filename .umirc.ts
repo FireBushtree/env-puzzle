@@ -5,20 +5,20 @@ export default defineConfig({
   // logo: '/images/logo.jpg',
   mode: 'site',
   alias: {
-    envd: path.resolve(__dirname, './src'),
+    'env-puzzle': path.resolve(__dirname, './src'),
   },
   extraBabelPlugins: [
     ['import', {libraryName: 'antd', style: 'css'}, 'antd'],
     [
       'import',
       {
-        libraryName: 'envd',
+        libraryName: 'env-puzzle',
         libraryDirectory: '',
         customStyleName: (name) => {
-          return `envd/${name}/style/index.less`;
+          return `env-puzzle/${name}/style/index.less`;
         },
       },
-      'envd',
+      'env-puzzle',
     ],
   ],
   menus: {

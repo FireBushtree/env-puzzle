@@ -1,7 +1,7 @@
 es
 lib
 node_modules
-envd-typings
+env-puzzle-typings
 
 yarn.lock
 yarn-error.log

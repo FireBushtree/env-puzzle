@@ -1,6 +1,6 @@
 {
-  "name": "envd",
-  "version": "0.0.1",
+  "name": "env-puzzle",
+  "version": "0.0.3",
   "main": "lib/index.js",
   "module": "es/index.js",
   "description": "Envcloud frontend accumulation",

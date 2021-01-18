@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "envd": ["src"],
+      "env-puzzle": ["src"],
       "@/src/*": ["src/*"]
     },
     "declaration": true,
