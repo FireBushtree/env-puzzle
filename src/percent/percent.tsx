@@ -13,7 +13,11 @@ const THEME_COLOR = '#4EF6FC';
 const Percent: React.FC<PercentProps> = (props: PercentProps) => {
   const wrapRef = React.useRef<HTMLDivElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const {value, title, style, className} = props;
+  const {title, style, className} = props;
+
+  let {value} = props;
+  value < 0 && (value = 0);
+  value > 100 && (value = 100);
 
   React.useEffect(() => {
     if (!canvasRef) {
@@ -27,6 +31,9 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
     const ctx = canvasRef.current.getContext('2d');
     current.width = canvasWidth;
     current.height = canvasHeight;
+
+    // 擦除
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     const padding = canvasWidth * 0.05; // 距离上下左右的距离;
     const maxRadius = (canvasWidth - 2 * padding) / 2; // 最大可使用半径
@@ -75,12 +82,13 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       renderColumn(i, '#ccc');
     }
 
+    let timer = null;
     let currentActiveCount = 0;
     const renderActiveColumn = () => {
       if (currentActiveCount <= activeCount) {
         renderColumn(currentActiveCount, THEME_COLOR);
         currentActiveCount += 1;
-        setTimeout(() => {
+        timer = setTimeout(() => {
           renderActiveColumn();
         }, 100);
       }
@@ -104,7 +112,12 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
     ctx.textAlign = 'right';
     ctx.fillText('100%', canvasWidth - padding, circleCenterY + 14);
     ctx.textAlign = 'start';
-  }, [wrapRef]);
+
+    return () => {
+      clearTimeout(timer);
+      timer = null;
+    };
+  }, [value]);
 
   return (
     <div

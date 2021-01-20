@@ -12,7 +12,7 @@ const PercentDemo: React.FC = () => {
         flexDirection: 'column',
       }}
     >
-      <Percent style={{flex: 1}} title="生活垃圾增长率" value={50} />
+      <Percent style={{flex: 1}} title="生活垃圾增长率" value={80} />
     </div>
   );
 };
