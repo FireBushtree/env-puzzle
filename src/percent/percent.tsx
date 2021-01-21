@@ -13,9 +13,9 @@ const THEME_COLOR = '#4EF6FC';
 const Percent: React.FC<PercentProps> = (props: PercentProps) => {
   const wrapRef = React.useRef<HTMLDivElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const {title, style, className} = props;
+  const {value: realValue, title, style, className} = props;
 
-  let {value} = props;
+  let value = realValue;
   value < 0 && (value = 0);
   value > 100 && (value = 100);
 
@@ -94,7 +94,9 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       }
     };
 
-    renderActiveColumn();
+    if (activeCount > 0) {
+      renderActiveColumn();
+    }
 
     // 渲染文字
     ctx.font = `bold 18px Arial`;
@@ -126,7 +128,7 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       ref={wrapRef}
     >
       <canvas ref={canvasRef}></canvas>
-      <div className="env-percent-semicircle__value">{value}%</div>
+      <div className="env-percent-semicircle__value">{realValue}%</div>
     </div>
   );
 };
