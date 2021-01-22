@@ -71,6 +71,7 @@
     "prettier": "2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-jss": "^10.5.0",
     "through2": "^4.0.2",
     "ts-jest": "^26.4.4",
     "ttypescript": "^1.5.12",
