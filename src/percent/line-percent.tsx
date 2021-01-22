@@ -1,7 +1,9 @@
 import React, {useRef} from 'react';
+import classnames from 'classnames';
+import {PercentCommonI} from './interface';
 
-export interface LinePercenetProps {
-  name: React.ReactNode;
+export interface LinePercenetProps extends PercentCommonI {
+  title?: React.ReactNode;
   value: number;
   lineWidth?: number;
   suffix?: React.ReactNode;
@@ -10,7 +12,7 @@ export interface LinePercenetProps {
 const LinePercenet: React.FC<LinePercenetProps> = (
     props: LinePercenetProps,
 ) => {
-  const {name, value, suffix, lineWidth} = props;
+  const {title, value, suffix, lineWidth, className, style} = props;
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -34,7 +36,7 @@ const LinePercenet: React.FC<LinePercenetProps> = (
     const lineHeight = 10;
     const topLeftPointX = 5;
     const topLeftPointY = canvasHeight - lineHeight;
-    const lineLength = canvasWidth - topLeftPointX;
+    const lineLength = canvasWidth - topLeftPointX - 20;
     ctx.moveTo(topLeftPointX, topLeftPointY);
     ctx.lineTo(topLeftPointX + lineLength, topLeftPointY);
     ctx.lineTo(lineLength, topLeftPointY + lineHeight);
@@ -45,7 +47,8 @@ const LinePercenet: React.FC<LinePercenetProps> = (
 
     const itemColLength = 10;
     const itemColPadding = 5; // 每个小柱子的间距
-    const totalCol = Math.floor(canvasWidth / (itemColLength + itemColPadding));
+    const totalCol =
+      Math.floor(canvasWidth / (itemColLength + itemColPadding)) - 1;
     const perValue = 100 / totalCol;
     const activeValueCount = Math.floor(value / perValue);
 
@@ -77,12 +80,16 @@ const LinePercenet: React.FC<LinePercenetProps> = (
   }, [value]);
 
   return (
-    <div className="env-percent-line">
-      <div className="env-percent-line__name">{name}</div>
-      <img
-        className="env-percent-line__arrow"
-        src={require('./images/icon-arrow.png')}
-      />
+    <div style={style} className={classnames(className, 'env-percent-line')}>
+      {title && (
+        <>
+          <div className="env-percent-line__name">{title}</div>
+          <img
+            className="env-percent-line__arrow"
+            src={require('./images/icon-arrow.png')}
+          />
+        </>
+      )}
       <div
         ref={wrapRef}
         style={{width: lineWidth}}

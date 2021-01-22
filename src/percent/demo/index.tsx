@@ -5,16 +5,18 @@ import {createUseStyles} from 'react-jss';
 const useStyles = createUseStyles({
   percentDemo: {
     width: '100%',
-    height: 600,
+    height: 300,
     background: 'rgba(0, 0, 0, 1)',
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   percentItem: {
     width: 300,
-    height: 200,
+    height: 240,
   },
 });
-
-const {LinePercent} = Percent;
 
 const PercentDemo: React.FC = () => {
   const classes = useStyles();
@@ -27,7 +29,17 @@ const PercentDemo: React.FC = () => {
         value={80}
       />
 
-      <LinePercent lineWidth={500} name="我的颜值" value={80} />
+      <Percent
+        className={classes.percentItem}
+        title="叹气次数增长率"
+        value={36}
+      />
+
+      <Percent
+        className={classes.percentItem}
+        title="不想干了次数增长率"
+        value={100}
+      />
     </div>
   );
 };

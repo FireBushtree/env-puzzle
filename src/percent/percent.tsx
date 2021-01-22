@@ -1,11 +1,10 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import {PercentCommonI} from './interface';
 
-export interface PercentProps {
-  className?: string;
-  style?: React.CSSProperties;
+export interface PercentProps extends PercentCommonI {
   value: number;
-  title: string;
+  title?: string;
 }
 
 const THEME_COLOR = '#4EF6FC';
@@ -98,14 +97,16 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       renderActiveColumn();
     }
 
-    // 渲染文字
-    ctx.font = `bold 18px Arial`;
-    ctx.fillStyle = THEME_COLOR;
-    ctx.fillText(
-        title,
-        (ctx.canvas.width - ctx.measureText(title).width) / 2,
-        circleCenterY + 40,
-    );
+    if (title) {
+      // 渲染文字
+      ctx.font = `bold 18px Arial`;
+      ctx.fillStyle = THEME_COLOR;
+      ctx.fillText(
+          title,
+          (ctx.canvas.width - ctx.measureText(title).width) / 2,
+          circleCenterY + 40,
+      );
+    }
 
     ctx.font = `12px Arial`;
     ctx.fillStyle = '#ffffff';
