@@ -6,6 +6,7 @@ export default defineConfig({
   mode: 'site',
   alias: {
     'env-puzzle': path.resolve(__dirname, './src'),
+    '@/src': path.resolve(__dirname, './src'),
   },
   extraBabelPlugins: [
     ['import', {libraryName: 'antd', style: 'css'}, 'antd'],
@@ -31,7 +32,12 @@ export default defineConfig({
     '/component': [
       {
         title: '组件',
-        children: ['table/index.md', 'scroll/index.md', 'percent/index.md'],
+        children: [
+          'table/index.md',
+          'scroll/index.md',
+          'percent/index.md',
+          'b-map/index.md',
+        ],
       },
     ],
   },

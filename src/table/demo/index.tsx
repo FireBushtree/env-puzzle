@@ -55,6 +55,7 @@ const TableDemo: React.FC = () => {
 
   return (
     <Table
+      rowSpacing={10}
       scroll={{y: 200}}
       autoScroll
       columns={columns}

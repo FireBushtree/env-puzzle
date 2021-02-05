@@ -7,6 +7,7 @@ export interface TableProps<T> extends AntTableProps<T> {
   wrapClassName?: string;
   autoScroll?: boolean;
   onReachBottom?: (e: Event) => any;
+  rowSpacing?: number;
 }
 
 /**
@@ -31,6 +32,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
     className,
     onReachBottom,
     autoScroll,
+    rowSpacing,
     ...rest
   } = props;
 
@@ -119,7 +121,9 @@ function Table<T extends object = any>(props: TableProps<T>) {
   return (
     <div className={wrapClassName} ref={wrapRef}>
       <AntTable
-        className={classnames('env-table', className)}
+        className={classnames('env-table', className, {
+          'env-table__spacing': rowSpacing,
+        })}
         pagination={false}
         dataSource={dataSource}
         {...rest}
