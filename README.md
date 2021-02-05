@@ -8,5 +8,5 @@
 
 ## ToDo
 
-[ ] add line percent
-[ ] add b-map component
+* [x] add line percent
+* [ ] fix error aggregation js file
