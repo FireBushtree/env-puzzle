@@ -1,5 +1,6 @@
 import path from 'path';
 import {defineConfig} from 'dumi';
+import IgnoreNotFoundExportPlugin from './webpack-plugins/ignore-not-found-export-plugin';
 
 export default defineConfig({
   // logo: '/images/logo.jpg',
@@ -42,4 +43,7 @@ export default defineConfig({
     ],
   },
   navs: [null],
+  chainWebpack(memo, {env, webpack, createCSSRule}) {
+    memo.plugin('IgnoreNotFoundExportPlugin').use(IgnoreNotFoundExportPlugin);
+  },
 });

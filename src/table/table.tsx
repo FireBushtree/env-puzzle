@@ -7,6 +7,11 @@ export interface TableProps<T> extends AntTableProps<T> {
   wrapClassName?: string;
   autoScroll?: boolean;
   onReachBottom?: (e: Event) => any;
+
+  /**
+   * 表格的间距， 自动滚动的时候， 若设置了这个属性， 会导致卡顿一下
+   * 所以需要设置
+   */
   rowSpacing?: number;
 }
 

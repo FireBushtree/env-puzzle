@@ -89,15 +89,8 @@ class InternalBMap extends React.Component<
       );
 
       await loadJavascript(
-          'https://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js',
-      );
-
-      await loadJavascript(
           'https://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js',
       );
-
-      // TODO error
-      await loadJavascript('./js/MarkerClusterer.js');
 
       // eslint-disable-next-line max-len
       window.BMap.Map.prototype.customSetMapCenter = function customSetMapCenter(

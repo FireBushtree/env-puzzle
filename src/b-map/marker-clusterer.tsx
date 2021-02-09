@@ -1,15 +1,28 @@
 import React from 'react';
+import {loadJavascript} from '@/src/utils/dom';
 import {Point} from './b-map';
 
 export interface MarkerClusterProps {
   map?: any;
   points: Array<Point>;
-  onMarkerClick: (item: any) => any;
+
+  /**
+   * 散开后点位的点击事件
+   */
+  onMarkerClick?: (item: any) => any;
+
+  /**
+   * 散开后点位的icon
+   */
   markerIcon: {
     url: string;
     width: number;
     height: number;
   };
+
+  /**
+   * 聚合点位的icon
+   */
   markerClusterIcon: {
     url: string;
     width: number;
@@ -23,6 +36,17 @@ const MarkerCluster: React.FC<MarkerClusterProps> = (
   const {map, markerIcon, markerClusterIcon, points, onMarkerClick} = props;
 
   React.useEffect(() => {
+    // 如果没有`MarkerClusterer`需要加载需要的类
+    if (!window.BMapLib.MarkerClusterer) {
+      (async () => {
+        // MarkerClusterer需要依赖这个
+        await loadJavascript(
+            'https://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js',
+        );
+        await require('./js/marker-clusterer.js');
+      })();
+    }
+
     const markers: Array<typeof window.BMap.Marker> = [];
     const myIcon = new window.BMap.Icon(
         markerIcon.url,

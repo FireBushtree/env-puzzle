@@ -8,7 +8,7 @@ const BMapDemo: React.FC = () => {
   const [center, setCenter] = useState<{lng: number; lat: number}>();
 
   return (
-    <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
+    <div style={{height: 300, display: 'flex', flexDirection: 'column'}}>
       <div style={{display: 'flex', padding: '10px'}}>
         <Button
           onClick={() => {

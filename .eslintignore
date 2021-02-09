@@ -7,3 +7,4 @@ gulpfile.js
 .huskyrc.js
 .lintstagedrc.js
 .umirc.ts
+webpack-plugins
