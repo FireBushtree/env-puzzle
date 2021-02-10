@@ -1,6 +1,5 @@
 import React from 'react';
 import {BMap} from 'env-puzzle';
-import {Point} from 'env-puzzle/lib/b-map';
 import {createUseStyles} from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -13,13 +12,10 @@ const useStyles = createUseStyles({
 
 const AggregationDemo: React.FC = () => {
   const style = useStyles();
-  const points: Array<Point> = [];
 
   return (
     <div className={style.aggregationDemo}>
-      <BMap>
-        <BMap.MarkerClusterer></BMap.MarkerClusterer>
-      </BMap>
+      <BMap></BMap>
     </div>
   );
 };

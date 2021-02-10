@@ -44,6 +44,9 @@ export default defineConfig({
   },
   navs: [null],
   chainWebpack(memo, {env, webpack, createCSSRule}) {
-    memo.plugin('IgnoreNotFoundExportPlugin').use(IgnoreNotFoundExportPlugin);
+    memo
+      .plugin('IgnoreNotFoundExportPlugin')
+      .before('friendly-error')
+      .use(IgnoreNotFoundExportPlugin);
   },
 });

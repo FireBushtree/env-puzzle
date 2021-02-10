@@ -4,7 +4,6 @@ module.exports = class IgnoreNotFoundExportPlugin {
   apply(compiler) {
     const messageRegExp = /export '.*'( \(reexported as '.*'\))? was not found in/;
     function doneHook(stats) {
-      console.log(stats.compilation.warnings.length);
       stats.compilation.warnings = stats.compilation.warnings.filter(function (
         warn,
       ) {
