@@ -23,3 +23,10 @@ nav:
 当点位过多的时候， 在地图上看起来很密集， 可以使用聚合点位。
 
 <code src="./demo/aggregation" />
+
+## 覆盖物
+
+用于展示覆盖物
+
+<code src="./demo/polygon.demo" />
+

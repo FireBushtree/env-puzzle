@@ -22,9 +22,8 @@ export default (BMapOverlay: typeof window.BMap.Overlay) =>
       this.div = div;
       div.setAttribute('tag', 'customoverlay');
       div.style.position = 'absolute';
-      const zIndex =
+      div.style.zIndex =
         this.options.zIndex || window.BMap.Overlay.getZIndex(this.point.lat);
-      div.style.zIndex = zIndex;
       div.addEventListener('touchstart', (e) => {
         e.stopPropagation();
       });
