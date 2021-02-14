@@ -42,6 +42,11 @@ const getTypingFiles = () => {
 };
 
 (async () => {
+  // 去除上次打包的文件
+  await remove('env-puzzle-typings', 'env-puzzle', 'typings');
+  await remove('lib', 'lib', 'last build');
+  await remove('es', 'es', 'last build');
+
   // 1. 使用ttypescript 生成 .d.ts文件
   console.log('start generate declaration folder');
   await execa(`npx ttsc --outDir ${TYPEINGS_FOLDER}`);

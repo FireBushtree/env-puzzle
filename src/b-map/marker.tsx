@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import getCustomOverlay from './custom-overlay';
+import {Point} from './index';
 
-export interface MarkerProps {
+export interface MarkerProps extends Point {
   map?: any;
   icon?: {
     url: string;
     width: number;
     height: number;
   };
-  lng: number;
-  lat: number;
   jump?: boolean;
   zIndex?: number;
   onClick?: (...rest: any[]) => any;
