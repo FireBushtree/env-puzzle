@@ -19,9 +19,16 @@ const PolygonDemo: FC = () => {
     {lng: 120.550443, lat: 31.261347},
   ];
 
+  const anotherPoints = [
+    {lng: 116.340453, lat: 39.94791},
+    {lng: 116.520977, lat: 39.898884},
+    {lng: 116.360288, lat: 39.857688},
+  ];
+
   return (
     <div>
       <BMap zoom={12} className={style.wrap}>
+        <BMap.Polygon boundaries={anotherPoints} />
         <BMap.Polygon boundaries={points} options={{strokeWeight: 10}} />
       </BMap>
     </div>
