@@ -4,6 +4,7 @@ import {createUseStyles} from 'react-jss';
 import {Button} from 'antd';
 import {Point} from 'env-puzzle/lib/b-map';
 
+const {defaultZoom} = BMap;
 const {MarkerClusterer, Marker} = BMap;
 
 const useStyles = createUseStyles({
@@ -19,6 +20,7 @@ const AggregationDemo: React.FC = () => {
   const style = useStyles();
   const [mapCenter, setMapCenter] = useState({lng: 120.591693, lat: 31.304737});
   const [currentPoint, setCurrentPoint] = useState<Point>();
+  const [zoom, setZoom] = useState(defaultZoom);
 
   const points: Array<Point> = [];
 
@@ -34,6 +36,7 @@ const AggregationDemo: React.FC = () => {
         <div>
           <Button
             onClick={() => {
+              setZoom(defaultZoom);
               setCurrentPoint(undefined);
             }}
           >
@@ -42,7 +45,13 @@ const AggregationDemo: React.FC = () => {
         </div>
       )}
 
-      <BMap center={mapCenter}>
+      <BMap
+        zoom={zoom}
+        onZoomChange={(value) => {
+          setZoom(value);
+        }}
+        center={mapCenter}
+      >
         {currentPoint ? (
           <Marker
             lng={currentPoint?.lng || ''}

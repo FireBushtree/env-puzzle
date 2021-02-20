@@ -2,6 +2,9 @@ import * as React from 'react';
 import classnames from 'classnames';
 import {loadJavascript} from '@/src/utils/dom';
 
+export const defaultCenter = {lng: 116.404, lat: 39.915};
+export const defaultZoom = 15;
+
 export interface Point {
   lng: number | string;
   lat: number | string;
@@ -32,8 +35,8 @@ class InternalBMap extends React.Component<
   containerRef: HTMLDivElement | null;
 
   static defaultProps = {
-    center: {lng: 120.591693, lat: 31.304737},
-    zoom: 15,
+    center: defaultCenter,
+    zoom: defaultZoom,
   };
 
   /**
