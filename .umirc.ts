@@ -38,6 +38,7 @@ export default defineConfig({
           'scroll/index.md',
           'percent/index.md',
           'b-map/index.md',
+          'to-map/index.md',
         ],
       },
     ],

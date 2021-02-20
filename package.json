@@ -79,6 +79,7 @@
     "typescript-transform-paths": "^2.0.1"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.5.0",
     "antd": "^4.10.0"
   }
 }

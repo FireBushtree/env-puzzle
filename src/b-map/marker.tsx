@@ -10,6 +10,10 @@ export interface MarkerProps extends Point {
     width: number;
     height: number;
   };
+  offset?: {
+    width: number;
+    height: number;
+  };
   jump?: boolean;
   zIndex?: number;
   onClick?: (...rest: any[]) => any;
@@ -72,6 +76,7 @@ class Marker extends Component<MarkerProps, MarkerState> {
       onDragend,
       children,
       jump,
+      offset,
     } = this.props;
 
     if (children) {
@@ -88,6 +93,7 @@ class Marker extends Component<MarkerProps, MarkerState> {
 
       const markerOptions: {
         icon?: typeof window.BMap.Icon;
+        offset?: typeof window.BMap.Size;
       } = {};
 
       if (icon) {
@@ -99,7 +105,17 @@ class Marker extends Component<MarkerProps, MarkerState> {
         markerOptions.icon = myIcon;
       }
 
+      if (offset) {
+        const offsetSize = new window.BMap.Size(offset.width, offset.height);
+        markerOptions.offset = offsetSize;
+      }
+
       this.marker = new window.BMap.Marker(point, markerOptions);
+
+      if (zIndex) {
+        this.marker.setZIndex(zIndex);
+      }
+
       map.addOverlay(this.marker);
 
       if (jump) {

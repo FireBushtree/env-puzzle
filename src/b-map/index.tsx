@@ -1,4 +1,9 @@
-import InternalBMap, {Point, defaultCenter, defaultZoom} from './b-map';
+import InternalBMap, {
+  Point,
+  defaultCenter,
+  defaultZoom,
+  InternalBMapProps,
+} from './b-map';
 import Marker from './marker';
 import Polygon from './polygon';
 import MarkerClusterer from './marker-clusterer';
@@ -21,4 +26,4 @@ BMap.MarkerClusterer = MarkerClusterer;
 
 export default BMap;
 
-export {Point};
+export {Point, InternalBMapProps};
