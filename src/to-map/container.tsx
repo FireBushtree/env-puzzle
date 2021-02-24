@@ -19,6 +19,11 @@ export interface ExportAttributes {
 }
 
 export interface ContainerProps {
+  center?: Point;
+  /**
+   * 当地图实例创建完毕后的回调
+   */
+  onMapCreate?: (map: any) => any;
   /**
    * 组件顶部额外的按钮元素
    */
@@ -34,7 +39,7 @@ const Container: React.ForwardRefRenderFunction<
   ExportAttributes,
   ContainerProps
 > = (props: ContainerProps, ref) => {
-  const {headerBtns, onChange} = props;
+  const {headerBtns, onChange, onMapCreate} = props;
 
   /**
    * 地图实例
@@ -212,6 +217,7 @@ const Container: React.ForwardRefRenderFunction<
             center={center}
             onCreate={(map: any) => {
               setMap(map);
+              onMapCreate && onMapCreate(map);
 
               const localSearch = new window.BMap.LocalSearch(map, {
                 // 智能搜索
