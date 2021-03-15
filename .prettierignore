@@ -8,3 +8,4 @@ gulpfile.js
 
 package.json
 tsconfig.json
+src/template/icon-font

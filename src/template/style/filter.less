@@ -1,0 +1,42 @@
+.env-template-filter {
+  & &-col {
+    display: flex;
+    align-items: center;
+
+    &.is-hide {
+      display: none;
+    }
+
+    &-label {
+      width: 90px;
+      text-align: right;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &-form-item {
+    width: 100%;
+  }
+
+  &-actions {
+    text-align: right;
+
+    .ant-btn + .ant-btn {
+      margin-left: 8px;
+    }
+  }
+
+  &-btn-pack {
+    padding: 0;
+  }
+
+  & &-btn-fold {
+    transition: all 0.3s;
+
+    &.is-fold {
+      transform: rotate(180deg);
+    }
+  }
+}

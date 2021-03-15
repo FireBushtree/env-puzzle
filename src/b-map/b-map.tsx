@@ -168,7 +168,6 @@ class InternalBMap extends React.Component<
     });
   }
 
-  // eslint-disable-next-line require-jsdoc
   render() {
     const {className, style} = this.props;
 

@@ -39,6 +39,7 @@ export default defineConfig({
           'percent/index.md',
           'b-map/index.md',
           'to-map/index.md',
+          'template/index.md',
         ],
       },
     ],
