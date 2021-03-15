@@ -1,12 +1,13 @@
 {
   "name": "env-puzzle",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "lib/index.js",
   "module": "es/index.js",
   "description": "Envcloud frontend accumulation",
   "license": "MIT",
   "scripts": {
     "dev": "dumi dev",
+    "build:doc": "dumi build",
     "commit": "git-cz",
     "build": "node script/build.js && gulp less copyJs",
     "prettier": "prettier -c --write .",

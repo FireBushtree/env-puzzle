@@ -1,5 +1,10 @@
 import moment from 'moment';
-import React, {useEffect} from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import {Point} from './b-map';
 
 export interface LuShuProps {
@@ -12,8 +17,20 @@ export interface LuShuProps {
   };
 }
 
-const LuShu: React.FC<LuShuProps> = (props: LuShuProps) => {
+export interface LushuControl {
+  lushu: any;
+}
+
+const LuShu: React.ForwardRefRenderFunction<LushuControl, LuShuProps> = (
+    props: LuShuProps,
+    ref,
+) => {
   const {map, points, icon} = props;
+  const [instance, setInstance] = useState<any>();
+
+  useImperativeHandle(ref, () => ({
+    lushu: instance,
+  }));
 
   useEffect(() => {
     const path: Array<typeof window.BMap.Point> = [];
@@ -36,6 +53,9 @@ const LuShu: React.FC<LuShuProps> = (props: LuShuProps) => {
       defaultContent: '',
       enableRotation: true,
     });
+
+    setInstance(lushu);
+
     lushu.start();
 
     return () => {
@@ -49,4 +69,4 @@ const LuShu: React.FC<LuShuProps> = (props: LuShuProps) => {
   return <div />;
 };
 
-export default LuShu;
+export default forwardRef(LuShu);

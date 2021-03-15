@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {BMap} from 'env-puzzle';
 import {createUseStyles} from 'react-jss';
 import {Button} from 'antd';
+
+// @ts-ignore
 import {Point} from 'env-puzzle/lib/b-map';
 
 const {defaultZoom} = BMap;

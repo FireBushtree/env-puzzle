@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
-import {ToMap} from 'env-puzzle';
 import {Card} from 'antd';
+import {ToMap} from 'env-puzzle';
 
 // @ts-ignore
 import {Point} from 'env-puzzle/lib/b-map';
@@ -8,12 +8,16 @@ import {Point} from 'env-puzzle/lib/b-map';
 // @ts-ignore
 import {ToMapControl} from 'env-puzzle/lib/to-map';
 
-const ToMapDemo: React.FC = () => {
+const ValueDemo: React.FC = () => {
   const [point, setPoint] = useState<
     Point & {
       address?: string;
     }
-  >();
+  >({
+    lng: 120.59241231942377,
+    lat: 31.303564845796398,
+    address: '江苏省苏州市姑苏区三香路985号',
+  });
 
   const toMapRef = useRef<ToMapControl>(null);
 
@@ -27,6 +31,7 @@ const ToMapDemo: React.FC = () => {
         </Card>
       )}
       <ToMap
+        value={point}
         ref={toMapRef}
         onOk={(value) => {
           toMapRef.current.map.geocoder(value, (res: any) => {
@@ -41,4 +46,4 @@ const ToMapDemo: React.FC = () => {
   );
 };
 
-export default ToMapDemo;
+export default ValueDemo;
