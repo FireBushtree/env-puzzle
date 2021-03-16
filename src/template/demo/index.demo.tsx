@@ -1,11 +1,12 @@
 import React, {useRef, useState} from 'react';
 import {Template, CreateModal, ViewModal} from 'env-puzzle';
-import {Input} from 'antd';
+import {Input, message} from 'antd';
 
 // @ts-ignore
 import {CreateModalControl} from 'env-puzzle/lib/create-modal';
 
 export interface Student {
+  id: number;
   name: string;
   gender: string;
   classNum: string;
@@ -57,12 +58,25 @@ const TemplateDemo: React.FC = () => {
                     createModalRef.current.form.setFieldsValue(record);
                   },
                 },
+                {
+                  name: '删除',
+                  onClick: () =>
+                    new Promise((resolve, reject) => {
+                      setTimeout(() => {
+                        resolve(1);
+                        message.success('删除成功');
+                      }, 2000);
+                    }),
+                },
               ],
             },
           ],
         }}
         actionProps={{
           onCreate: () => setShowCreate(true),
+          onDelete: (rows) => {
+            console.log(rows);
+          },
         }}
         getDataSource={(pagination, filter) => {
           return new Promise((resolve, reject) => {
@@ -70,6 +84,7 @@ const TemplateDemo: React.FC = () => {
               total: 100,
               rows: [
                 {
+                  id: 1,
                   name: '小黑',
                   gender: '男',
                   classNum: '1',
@@ -83,7 +98,6 @@ const TemplateDemo: React.FC = () => {
         <Input data-name="name" data-label="姓名" />
         <Input data-name="gender" data-label="性别" />
         <Input data-name="classNum" data-label="班级" />
-        <Input data-name="studentId" data-label="学号" />
       </Template>
 
       <CreateModal

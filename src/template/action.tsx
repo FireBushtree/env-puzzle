@@ -1,10 +1,11 @@
 import {
   CaretDownOutlined,
   DeleteOutlined,
+  ExclamationCircleOutlined,
   MenuOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import {Button, Checkbox, Menu, Popover} from 'antd';
+import {Button, Checkbox, Menu, Modal, Popover} from 'antd';
 import React from 'react';
 import {cloneDeep} from 'lodash';
 import {TableColumnType} from './table';
@@ -13,7 +14,7 @@ import Icon from './icon';
 
 export interface ActionProps<T> {
   onCreate?: () => any;
-  onDelete?: () => any;
+  onDelete?: (selectRows: Array<T>) => any;
   onExport?: () => any;
   onImport?: () => any;
   createBtn?: boolean;
@@ -86,7 +87,16 @@ function Action<T extends object = any>(props: ActionProps<T>) {
         {deleteBtn && (
           <Button
             onClick={() => {
-              onDelete && onDelete();
+              Modal.confirm({
+                title: `确定删除选中的${selectRows.length}条数据吗？`,
+                icon: <ExclamationCircleOutlined />,
+                onOk: () => {
+                  return onDelete && onDelete(selectRows);
+                },
+                onCancel: () => {
+                  // nothing todo
+                },
+              });
             }}
             type="primary"
             icon={<DeleteOutlined />}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSize} from 'ahooks';
 import classnames from 'classnames';
-import {Table as AntTable, Pagination} from 'antd';
+import {Table as AntTable, Pagination, Modal} from 'antd';
 import {
   TablePaginationConfig,
   TableProps as AntTableProps,
@@ -9,7 +9,7 @@ import {
   ColumnType,
 } from 'antd/lib/table';
 import {Button, Popover, List} from 'antd';
-import {DownOutlined} from '@ant-design/icons';
+import {DownOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 
 export interface ActionButton<T> {
   name: string;
@@ -28,6 +28,29 @@ export interface TableProps<T> extends Omit<AntTableProps<T>, 'columns'> {
   hasIndex?: boolean;
   selectable?: boolean;
   columns?: TableColumnType<T>;
+}
+
+function handleActionButtonClick<T>(
+    button: ActionButton<T>,
+    text: string,
+    record: T,
+    index: number,
+) {
+  if (button.name === '删除') {
+    Modal.confirm({
+      title: '确定删除该项吗？',
+      icon: <ExclamationCircleOutlined />,
+      onOk: () => {
+        return button.onClick && button.onClick(text, record, index);
+      },
+      onCancel: () => {
+        // nothing todo
+      },
+    });
+    return;
+  }
+
+  button.onClick && button.onClick(text, record, index);
 }
 
 function Table<T extends object = any>(props: TableProps<T>) {
@@ -89,9 +112,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
         return (
           <Button
             {...commonButtonProps}
-            onClick={() =>
-              button.onClick && button.onClick(text, record, index)
-            }
+            onClick={() => handleActionButtonClick(button, text, record, index)}
           >
             {button.name}
           </Button>
@@ -105,7 +126,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
           <Button
             {...commonButtonProps}
             onClick={() =>
-              firstButton.onClick && firstButton.onClick(text, record, index)
+              handleActionButtonClick(firstButton, text, record, index)
             }
           >
             {firstButton.name}
@@ -118,9 +139,9 @@ function Table<T extends object = any>(props: TableProps<T>) {
                 {restButtons.map((item, i) => (
                   <List.Item
                     key={i}
-                    onClick={() => {
-                      item.onClick && item.onClick(text, record, index);
-                    }}
+                    onClick={() =>
+                      handleActionButtonClick(item, text, record, index)
+                    }
                   >
                     {item.name}
                   </List.Item>
