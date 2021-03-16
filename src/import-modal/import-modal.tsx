@@ -79,10 +79,18 @@ const ImportModal: React.FC<ImportModalProps> = (props) => {
       {...rest}
     >
       <div className="env-import-modal-download-wrap">
-        <Button type="primary">下载模板</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            RequestUtil.downloadFile(templateSrc);
+          }}
+        >
+          下载模板
+        </Button>
       </div>
       <div className="env-import-modal-body">
         <Upload
+          // 增加这个prop只是为了禁用默认的上传请求
           beforeUpload={() => false}
           fileList={fileList}
           maxCount={1}

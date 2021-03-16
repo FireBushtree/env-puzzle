@@ -1,4 +1,5 @@
 import axios from 'axios';
+import download from 'downloadjs';
 import {AuthUtil} from '../utils/AuthUtil';
 
 export interface UploadFileRes {
@@ -11,6 +12,14 @@ export interface UploadFileRes {
  * 接口请求的工具类
  */
 export default class RequestUtil {
+  /**
+   * 文件下载
+   * @param {string} url
+   */
+  static downloadFile(url) {
+    download(url);
+  }
+
   /**
    * 文件上传
    * @param {string} url
