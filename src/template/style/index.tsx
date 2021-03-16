@@ -9,5 +9,6 @@ import 'antd/lib/pagination/style';
 import 'antd/lib/button/style';
 import 'antd/lib/list/style';
 import 'antd/lib/form/style';
+import 'antd/lib/modal/style';
 
 import './index.less';
