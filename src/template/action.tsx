@@ -55,7 +55,7 @@ function Action<T extends object = any>(props: ActionProps<T>) {
     selectRows,
   } = props;
 
-  const [showImport, setShowImport] = useState(true);
+  const [showImport, setShowImport] = useState(false);
 
   const talbeColumnMenus = (
     <Menu>
