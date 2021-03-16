@@ -1,17 +1,30 @@
 import {Modal, Form, Col, Row, Input, Button, Tooltip, message} from 'antd';
+import {FormInstance} from 'antd/lib/form';
 import {ModalProps as AntdModalProps} from 'antd/lib/modal';
-import React, {useRef, useState} from 'react';
+import React, {forwardRef, useImperativeHandle, useRef, useState} from 'react';
 
 export interface CreateModalProps extends AntdModalProps {
   onSave?: (formData: any) => any;
   onReset?: () => any;
+  children?: React.ReactNode;
 }
 
-const CreateModal: React.FC<CreateModalProps> = (props) => {
+export interface CreateModalControl {
+  form: FormInstance;
+}
+
+const CreateModal: React.ForwardRefRenderFunction<
+  CreateModalControl,
+  CreateModalProps
+> = (props, ref) => {
   const {children, visible, onSave, onReset, ...rest} = props;
   const [form] = Form.useForm();
   const formRef = useRef(null);
   const [saving, setSaving] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    form,
+  }));
 
   const renderFields = () => {
     const childArray: Array<React.ReactNode> = [];
@@ -142,4 +155,4 @@ const CreateModal: React.FC<CreateModalProps> = (props) => {
   );
 };
 
-export default CreateModal;
+export default forwardRef(CreateModal);
