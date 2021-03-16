@@ -1,8 +1,7 @@
-import {Button, Col, Row, Tooltip} from 'antd';
+import {Button, Col, Row, Tooltip, Form} from 'antd';
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import classnames from 'classnames';
 import {UpOutlined} from '@ant-design/icons';
-import {Form} from 'antd';
 import {FormInstance} from 'antd/lib/form';
 
 export interface FilterProps {
