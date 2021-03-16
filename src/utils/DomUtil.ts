@@ -1,3 +1,6 @@
+/**
+ * 常用的操作DOM的工具类
+ */
 export default class DomUtil {
   /**
    * 使用Promise异步的方式加载js文件

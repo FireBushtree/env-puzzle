@@ -1,6 +1,7 @@
 // eslint-disable-next-line spaced-comment
 /// <reference path='./typings.d.ts' />
 
+// components
 export {default as Table} from './table';
 export {default as Scroll} from './scroll';
 export {default as Percent} from './percent';
@@ -10,3 +11,9 @@ export {default as Template} from './template';
 export {default as CreateModal} from './create-modal';
 export {default as ViewModal} from './view-modal';
 export {default as ImportModal} from './import-modal';
+
+// utils
+export {default as DomUtil} from './utils/DomUtil';
+export {default as AuthUtil} from './utils/AuthUtil';
+export {default as StringUtil} from './utils/StringUtil';
+export {default as RequestUtil} from './utils/RequestUtil';

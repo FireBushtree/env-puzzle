@@ -1,6 +1,6 @@
 import axios from 'axios';
 import download from 'downloadjs';
-import {AuthUtil} from '../utils/AuthUtil';
+import AuthUtil from '../utils/AuthUtil';
 
 export interface UploadFileRes {
   result: 0 | 1;
@@ -12,6 +12,45 @@ export interface UploadFileRes {
  * 接口请求的工具类
  */
 export default class RequestUtil {
+  /**
+   * 导出文件专用
+   * @param {string} url
+   * @param {string} params
+   * @return {void}
+   */
+  static exportFile(url, params) {
+    if (!url || !params) {
+      return;
+    }
+
+    params = {...params, DATA_TYPE: 'page', access_token: AuthUtil.getToken()};
+    const name = 'downloadFileIframe';
+
+    const formDom = document.createElement('form');
+    formDom.style.display = 'none';
+    formDom.setAttribute('target', name);
+    formDom.setAttribute('method', 'post');
+    formDom.setAttribute('action', url);
+    document.body.appendChild(formDom);
+
+    for (const key in params) {
+      if (params[key] !== null && params[key] !== undefined) {
+        const inputDom = document.createElement('input');
+        const value =
+          typeof params[key] === 'object' ?
+            JSON.stringify(params[key]) :
+            params[key];
+        inputDom.setAttribute('type', 'hidden');
+        inputDom.setAttribute('name', key);
+        inputDom.setAttribute('value', value);
+        formDom.appendChild(inputDom);
+      }
+    }
+
+    formDom.submit();
+    formDom.parentNode.removeChild(formDom);
+  }
+
   /**
    * 文件下载
    * @param {string} url

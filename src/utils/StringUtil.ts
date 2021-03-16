@@ -1,4 +1,7 @@
-export class StringUtil {
+/**
+ * 对字符串处理的工具类
+ */
+export default class StringUtil {
   /**
    * 通过键名获取url的参数
    * @param {string} key  要获取的参数的键名

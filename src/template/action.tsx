@@ -16,7 +16,7 @@ import ImportModal from '../import-modal';
 export interface ActionProps<T> {
   onCreate?: () => any;
   onDelete?: (selectRows: Array<T>) => any;
-  onExport?: () => any;
+  onExport?: (type: string, selectRows?: Array<T>) => any;
   uploadUrl?: string;
   templateSrc?: string;
   onImport?: () => any;
@@ -48,8 +48,7 @@ function Action<T extends object = any>(props: ActionProps<T>) {
     uploadUrl,
     templateSrc,
     moreButtons,
-    // TODO: add event
-    // onExport,
+    onExport,
     onImport,
     selectable,
     selectRows,
@@ -78,9 +77,15 @@ function Action<T extends object = any>(props: ActionProps<T>) {
 
   const exportMenus = (
     <Menu>
-      <Menu.Item key="rows">导出选中行</Menu.Item>
-      <Menu.Item key="page">导出当前页</Menu.Item>
-      <Menu.Item key="all">导出全部</Menu.Item>
+      <Menu.Item onClick={() => onExport('rows', selectRows)} key="rows">
+        导出选中行
+      </Menu.Item>
+      <Menu.Item onClick={() => onExport('page')} key="page">
+        导出当前页
+      </Menu.Item>
+      <Menu.Item onClick={() => onExport('all')} key="all">
+        导出全部
+      </Menu.Item>
     </Menu>
   );
 

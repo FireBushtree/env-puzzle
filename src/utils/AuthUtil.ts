@@ -1,11 +1,15 @@
-import {StringUtil} from './StringUtil';
+import StringUtil from './StringUtil';
 
 const TENANT_ID = 'tenantId';
 const USER_ID = 'userId';
 const TOKEN = 'token';
 const ACCESS_TOKEN = 'access_token';
 
-export class AuthUtil {
+/**
+ * 常用的获取权限信息的工具类
+ * 比如 userId, tenantId, token等
+ */
+export default class AuthUtil {
   static getTenantId() {
     return StringUtil.getUrlParam(TENANT_ID) || localStorage.getItem(TENANT_ID);
   }

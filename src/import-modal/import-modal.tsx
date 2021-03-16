@@ -82,7 +82,7 @@ const ImportModal: React.FC<ImportModalProps> = (props) => {
         <Button
           type="primary"
           onClick={() => {
-            RequestUtil.downloadFile(templateSrc);
+            templateSrc && RequestUtil.downloadFile(templateSrc);
           }}
         >
           下载模板
