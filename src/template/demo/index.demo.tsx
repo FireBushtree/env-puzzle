@@ -1,25 +1,26 @@
 import React, {useRef, useState} from 'react';
-import {Template, CreateModal} from 'env-puzzle';
+import {Template, CreateModal, ViewModal} from 'env-puzzle';
 import {Input} from 'antd';
 
 // @ts-ignore
 import {CreateModalControl} from 'env-puzzle/lib/create-modal';
 
+export interface Student {
+  name: string;
+  gender: string;
+  classNum: string;
+  studentId: string;
+}
+
 const TemplateDemo: React.FC = () => {
   const [showCreate, setShowCreate] = useState(false);
+  const [showView, setShowView] = useState(false);
   const createModalRef = useRef<CreateModalControl>();
+  const [currentStudent, setCurrentStudent] = useState<Student>();
 
   return (
     <>
-      <Template<
-        any,
-        {
-          name: string;
-          gender: string;
-          classNum: string;
-          studentId: string;
-        }
-      >
+      <Template<any, Student>
         tableProps={{
           selectable: true,
           columns: [
@@ -42,7 +43,13 @@ const TemplateDemo: React.FC = () => {
             {
               title: '操作',
               renderButtons: () => [
-                {name: '查看'},
+                {
+                  name: '查看',
+                  onClick: (text, record) => {
+                    setShowView(true);
+                    setCurrentStudent(record);
+                  },
+                },
                 {
                   name: '编辑',
                   onClick: (text, record) => {
@@ -93,6 +100,17 @@ const TemplateDemo: React.FC = () => {
         <Input data-required data-label="班级" data-name="classNum" />
         <Input data-required data-label="学号" data-name="studentId" />
       </CreateModal>
+
+      <ViewModal
+        title="查看"
+        visible={showView}
+        onCancel={() => setShowView(false)}
+      >
+        <div data-label="姓名">{currentStudent?.name}</div>
+        <div data-label="性别">{currentStudent?.gender}</div>
+        <div data-label="班级">{currentStudent?.classNum}</div>
+        <div data-label="学号">{currentStudent?.studentId}</div>
+      </ViewModal>
     </>
   );
 };
