@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import {loadJavascript} from '@/src/utils/dom';
+import DomUtil from '@/src/utils/DomUtil';
 
 export const defaultCenter = {lng: 116.404, lat: 39.915};
 export const defaultZoom = 15;
@@ -87,15 +87,15 @@ class InternalBMap extends React.Component<
    */
   async init() {
     if (!window.BMap) {
-      await loadJavascript(
+      await DomUtil.loadJavascript(
           'http://api.map.baidu.com/getscript?v=3.0&ak=42IughV5lDxAt0wI8AhDVuGR',
       );
 
-      await loadJavascript(
+      await DomUtil.loadJavascript(
           'https://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js',
       );
 
-      await loadJavascript(
+      await DomUtil.loadJavascript(
           'https://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js',
       );
 
