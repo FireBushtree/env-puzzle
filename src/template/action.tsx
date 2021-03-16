@@ -17,6 +17,8 @@ export interface ActionProps<T> {
   onCreate?: () => any;
   onDelete?: (selectRows: Array<T>) => any;
   onExport?: () => any;
+  uploadUrl?: string;
+  templateSrc?: string;
   onImport?: () => any;
   createBtn?: boolean;
   deleteBtn?: boolean;
@@ -43,10 +45,12 @@ function Action<T extends object = any>(props: ActionProps<T>) {
     setColumns,
     onCreate,
     onDelete,
+    uploadUrl,
+    templateSrc,
     moreButtons,
     // TODO: add event
     // onExport,
-    // onImport,
+    onImport,
     selectable,
     selectRows,
   } = props;
@@ -190,7 +194,15 @@ function Action<T extends object = any>(props: ActionProps<T>) {
         )}
       </div>
 
-      <ImportModal visible={showImport} onCancel={() => setShowImport(false)} />
+      <ImportModal
+        onOk={() => {
+          onImport && onImport();
+        }}
+        uploadUrl={uploadUrl}
+        templateSrc={templateSrc}
+        visible={showImport}
+        onCancel={() => setShowImport(false)}
+      />
     </div>
   );
 }

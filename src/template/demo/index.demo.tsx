@@ -77,6 +77,7 @@ const TemplateDemo: React.FC = () => {
           onDelete: (rows) => {
             console.log(rows);
           },
+          uploadUrl: '/cloud/tjdx/prd/web/api/trashFeatureIndicator/import',
         }}
         getDataSource={(pagination, filter) => {
           return new Promise((resolve, reject) => {
