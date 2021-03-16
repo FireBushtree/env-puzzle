@@ -1,6 +1,6 @@
 {
   "name": "env-puzzle",
-  "version": "0.0.5",
+  "version": "0.0.11",
   "main": "lib/index.js",
   "module": "es/index.js",
   "description": "Envcloud frontend accumulation",
@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
+    "ahooks": "^2.9.6",
     "antd": "^4.10.0"
   }
 }

@@ -32,17 +32,14 @@ class Marker extends Component<MarkerProps, MarkerState> {
     jump: false,
   };
 
-  // eslint-disable-next-line require-jsdoc
   componentDidMount() {
     this.init();
   }
 
-  // eslint-disable-next-line require-jsdoc
   componentDidUpdate() {
     this.init();
   }
 
-  // eslint-disable-next-line require-jsdoc
   componentWillUnmount() {
     this.destroy();
   }
@@ -143,7 +140,6 @@ class Marker extends Component<MarkerProps, MarkerState> {
     }
   }
 
-  // eslint-disable-next-line require-jsdoc
   render() {
     return null;
   }

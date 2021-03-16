@@ -17,7 +17,7 @@ export default defineConfig({
         libraryName: 'env-puzzle',
         libraryDirectory: '',
         customStyleName: (name) => {
-          return `env-puzzle/${name}/style/index.less`;
+          return `env-puzzle/${name}/style/index.tsx`;
         },
       },
       'env-puzzle',
@@ -39,6 +39,7 @@ export default defineConfig({
           'percent/index.md',
           'b-map/index.md',
           'to-map/index.md',
+          'template/index.md',
         ],
       },
     ],

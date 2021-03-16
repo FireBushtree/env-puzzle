@@ -8,3 +8,4 @@ gulpfile.js
 .lintstagedrc.js
 .umirc.ts
 webpack-plugins
+src/template/icon-font

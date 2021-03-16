@@ -1,0 +1,55 @@
+.env-create-modal {
+  &-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #595959;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  &-col {
+    .ant-col {
+      align-self: center;
+    }
+  }
+
+  &-col + &-col {
+    margin-top: 24px;
+  }
+
+  .ant-modal-body {
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .ant-form {
+    color: #8c8c8c;
+  }
+
+  .ant-form-item-label {
+    line-height: 1;
+
+    > label {
+      color: #8c8c8c;
+      width: 90px;
+      margin-right: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      line-height: 32px;
+    }
+  }
+
+  .ant-form-item-control {
+    line-height: 1;
+  }
+
+  .ant-form-item-control-input-content {
+    > .ant-input-number {
+      width: 100%;
+    }
+  }
+}
