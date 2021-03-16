@@ -17,7 +17,7 @@ export default defineConfig({
         libraryName: 'env-puzzle',
         libraryDirectory: '',
         customStyleName: (name) => {
-          return `env-puzzle/${name}/style/index.less`;
+          return `env-puzzle/${name}/style/index.tsx`;
         },
       },
       'env-puzzle',

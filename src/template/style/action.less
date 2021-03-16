@@ -25,6 +25,13 @@
     }
   }
 
+  &-more-button-item {
+    display: flex;
+    align-items: center;
+    width: 60px;
+    justify-content: space-between;
+  }
+
   &-popover {
     .ant-popover-inner-content {
       padding: 10px 12px;
@@ -41,6 +48,12 @@
 
       .ant-menu-item-selected {
         background: #fff;
+      }
+    }
+
+    .env-template-action-more-button-list {
+      > .ant-menu-item {
+        padding: 0 6px;
       }
     }
   }

@@ -9,3 +9,4 @@ export {default as ToMap} from './to-map';
 export {default as Template} from './template';
 export {default as CreateModal} from './create-modal';
 export {default as ViewModal} from './view-modal';
+export {default as ImportModal} from './import-modal';

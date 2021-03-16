@@ -6,11 +6,12 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import {Button, Checkbox, Menu, Modal, Popover} from 'antd';
-import React from 'react';
+import React, {useState} from 'react';
 import {cloneDeep} from 'lodash';
 import {TableColumnType} from './table';
 import './icon-font/iconfont';
 import Icon from './icon';
+import ImportModal from '../import-modal';
 
 export interface ActionProps<T> {
   onCreate?: () => any;
@@ -21,6 +22,11 @@ export interface ActionProps<T> {
   deleteBtn?: boolean;
   importBtn?: boolean;
   exportBtn?: boolean;
+  moreButtons?: Array<{
+    icon?: React.ReactNode;
+    name: string;
+    onClick?: () => any;
+  }>;
   columns: TableColumnType<T>;
   selectable?: boolean;
   selectRows?: Array<T>;
@@ -32,17 +38,21 @@ function Action<T extends object = any>(props: ActionProps<T>) {
     columns,
     createBtn,
     deleteBtn,
-    // importBtn,
+    importBtn,
     exportBtn,
     setColumns,
     onCreate,
     onDelete,
+    moreButtons,
     // TODO: add event
     // onExport,
     // onImport,
     selectable,
     selectRows,
   } = props;
+
+  const [showImport, setShowImport] = useState(true);
+
   const talbeColumnMenus = (
     <Menu>
       {columns.map((item, index) => (
@@ -67,6 +77,38 @@ function Action<T extends object = any>(props: ActionProps<T>) {
       <Menu.Item key="rows">导出选中行</Menu.Item>
       <Menu.Item key="page">导出当前页</Menu.Item>
       <Menu.Item key="all">导出全部</Menu.Item>
+    </Menu>
+  );
+
+  const moreButtonList = (
+    <Menu className="env-template-action-more-button-list">
+      {importBtn && (
+        <Menu.Item
+          onClick={() => {
+            setShowImport(true);
+          }}
+          key="import"
+        >
+          <div className="env-template-action-more-button-item">
+            <Icon name="icon-daoru" />
+            <span>导入</span>
+          </div>
+        </Menu.Item>
+      )}
+      {moreButtons?.length > 0 &&
+        moreButtons.map((item, index) => (
+          <Menu.Item
+            onClick={() => {
+              item.onClick && item.onClick();
+            }}
+            key={index}
+          >
+            <div className="env-template-action-more-button-item">
+              <span>{item.icon}</span>
+              <span>{item.name}</span>
+            </div>
+          </Menu.Item>
+        ))}
     </Menu>
   );
 
@@ -106,13 +148,21 @@ function Action<T extends object = any>(props: ActionProps<T>) {
             删除
           </Button>
         )}
-        <Button
-          className="env-template-action-btn__more"
-          icon={<MenuOutlined />}
-          type="primary"
-        >
-          更多
-        </Button>
+
+        {(importBtn || moreButtons?.length > 0) && (
+          <Popover
+            overlayClassName="env-template-action-popover"
+            content={moreButtonList}
+          >
+            <Button
+              className="env-template-action-btn__more"
+              icon={<MenuOutlined />}
+              type="primary"
+            >
+              更多
+            </Button>
+          </Popover>
+        )}
       </div>
 
       <div className="env-template-action-right">
@@ -139,6 +189,8 @@ function Action<T extends object = any>(props: ActionProps<T>) {
           </Popover>
         )}
       </div>
+
+      <ImportModal visible={showImport} onCancel={() => setShowImport(false)} />
     </div>
   );
 }
