@@ -210,6 +210,7 @@ class Template<F, T extends object = any> extends Component<
 
           <Action
             {...actionProps}
+            dataSource={dataSource}
             filter={filter}
             selectable={selectable}
             selectRows={selectedRows}

@@ -19,7 +19,8 @@ export interface ActionProps<F, T> {
   onExport?: (
     type: React.Key,
     option: {
-      selectRows?: Array<T>;
+      dataSource: Array<T>;
+      selectRows: Array<T>;
       filter: F;
     },
   ) => any;
@@ -35,6 +36,7 @@ export interface ActionProps<F, T> {
     name: string;
     onClick?: () => any;
   }>;
+  dataSource: Array<T>;
   columns: TableColumnType<T>;
   filter: F;
   selectable?: boolean;
@@ -60,6 +62,7 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
     selectable,
     selectRows,
     filter,
+    dataSource,
   } = props;
 
   const [showImport, setShowImport] = useState(false);
@@ -89,6 +92,7 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
         onExport &&
           onExport(key, {
             filter,
+            dataSource,
             selectRows,
           });
       }}
