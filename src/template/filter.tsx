@@ -43,6 +43,7 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
         {childArray.map((item: React.ReactElement, index) => {
           const labelText = item.props['data-label'];
           const name = item.props['data-name'];
+          const initialValue = item.props['data-init-value'];
 
           return (
             <Col
@@ -53,6 +54,7 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
               key={index}
             >
               <Form.Item
+                initialValue={initialValue || undefined}
                 name={name}
                 className="env-template-filter-form-item"
                 label={

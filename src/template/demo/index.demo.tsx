@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Template, CreateModal, ViewModal} from 'env-puzzle';
-import {Input, message} from 'antd';
+import {DatePicker, Input, message} from 'antd';
+import moment from 'moment';
 
 // @ts-ignore
 import {CreateModalControl} from 'env-puzzle/lib/create-modal';
@@ -19,6 +20,7 @@ const TemplateDemo: React.FC = () => {
   const [showView, setShowView] = useState(false);
   const createModalRef = useRef<CreateModalControl>();
   const [currentStudent, setCurrentStudent] = useState<Student>();
+  const [isDog, setIsDog] = useState(false);
 
   return (
     <>
@@ -82,6 +84,7 @@ const TemplateDemo: React.FC = () => {
           uploadUrl: '/cloud/tjdx/prd/web/api/trashFeatureIndicator/import',
         }}
         getDataSource={(pagination, filter) => {
+          console.log(filter);
           return new Promise((resolve, reject) => {
             resolve({
               total: 100,
@@ -101,6 +104,11 @@ const TemplateDemo: React.FC = () => {
         <Input data-name="name" data-label="姓名" />
         <Input data-name="gender" data-label="性别" />
         <Input data-name="classNum" data-label="班级" />
+        <DatePicker.RangePicker
+          data-init-value={[moment().startOf('month'), moment()]}
+          data-name="test"
+          data-label="起始时间"
+        />
       </Template>
 
       <CreateModal
@@ -116,7 +124,15 @@ const TemplateDemo: React.FC = () => {
         <Input data-required data-label="性别" data-name="gender" />
         <Input data-required data-label="班级" data-name="classNum" />
         <Input data-required data-label="学号" data-name="studentId" />
-        <Checkbox data-required data-label="单身" data-name="dog" />
+        <Checkbox
+          onChange={(e) => {
+            setIsDog(e.target.checked);
+          }}
+          data-required
+          data-label="单身"
+          data-name="dog"
+        />
+        {isDog && <Input data-label="心动女生" data-name="girl" />}
       </CreateModal>
 
       <ViewModal
