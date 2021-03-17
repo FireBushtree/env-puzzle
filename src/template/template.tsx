@@ -15,7 +15,12 @@ export interface TemplatePagination {
 export interface TemplateProps<F, T> {
   actionProps?: Omit<
     ActionProps<F, T>,
-    'columns' | 'setColumns' | 'selectable' | 'selectRows' | 'filter'
+    | 'columns'
+    | 'setColumns'
+    | 'selectable'
+    | 'selectRows'
+    | 'filter'
+    | 'dataSource'
   >;
   tableProps: TableProps<T>;
   getDataSource: (

@@ -26,6 +26,15 @@ export default class RequestUtil {
     params = {...params, DATA_TYPE: 'page', access_token: AuthUtil.getToken()};
     const name = 'downloadFileIframe';
 
+    const existDownloadIframe = document.getElementsByName(name)[0];
+    if (!existDownloadIframe) {
+      const iframeDom = document.createElement('iframe');
+      iframeDom.setAttribute('name', name);
+      iframeDom.style.display = 'none';
+
+      document.body.appendChild(iframeDom);
+    }
+
     const formDom = document.createElement('form');
     formDom.style.display = 'none';
     formDom.setAttribute('target', name);
