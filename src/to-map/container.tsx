@@ -255,9 +255,7 @@ const Container: React.ForwardRefRenderFunction<
             {currentPoint && (
               <BMap.Marker
                 zIndex={1}
-                onDragend={() => {
-                  console.log(123);
-                }}
+                onDragend={() => {}}
                 lng={currentPoint.point.lng}
                 lat={currentPoint.point.lat}
               >

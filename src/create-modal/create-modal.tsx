@@ -44,8 +44,6 @@ const CreateModal: React.ForwardRefRenderFunction<
       childArray.push(item);
     });
 
-    console.log(childArray);
-
     return childArray.map((item, index) => {
       if (
         item === null ||
