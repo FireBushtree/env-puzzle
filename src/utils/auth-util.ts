@@ -1,4 +1,4 @@
-import StringUtil from './StringUtil';
+import StringUtil from './string-util';
 
 const TENANT_ID = 'tenantId';
 const USER_ID = 'userId';

@@ -13,7 +13,7 @@ export {default as ViewModal} from './view-modal';
 export {default as ImportModal} from './import-modal';
 
 // utils
-export {default as DomUtil} from './utils/DomUtil';
-export {default as AuthUtil} from './utils/AuthUtil';
-export {default as StringUtil} from './utils/StringUtil';
-export {default as RequestUtil} from './utils/RequestUtil';
+export {default as DomUtil} from './utils/dom-util';
+export {default as AuthUtil} from './utils/auth-util';
+export {default as StringUtil} from './utils/string-util';
+export {default as RequestUtil} from './utils/request-util';

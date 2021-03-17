@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import DomUtil from '@/src/utils/DomUtil';
+import DomUtil from '@/src/utils/dom-util';
 
 export const defaultCenter = {lng: 116.404, lat: 39.915};
 export const defaultZoom = 15;

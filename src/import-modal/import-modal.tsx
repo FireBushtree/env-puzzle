@@ -4,7 +4,7 @@ import {ModalProps as AntdModalProps} from 'antd/lib/modal';
 import classnames from 'classnames';
 import {UploadOutlined} from '@ant-design/icons';
 import {UploadFile} from 'antd/lib/upload/interface';
-import RequestUtil from '../utils/RequestUtil';
+import RequestUtil from '../utils/request-util';
 
 export interface ImportModalProps extends AntdModalProps {
   uploadUrl: string;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import download from 'downloadjs';
-import AuthUtil from '../utils/AuthUtil';
+import AuthUtil from './auth-util';
 
 export interface UploadFileRes {
   result: 0 | 1;
