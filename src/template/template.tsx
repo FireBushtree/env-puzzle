@@ -14,8 +14,8 @@ export interface TemplatePagination {
 
 export interface TemplateProps<F, T> {
   actionProps?: Omit<
-    ActionProps<T>,
-    'columns' | 'setColumns' | 'selectable' | 'selectRows'
+    ActionProps<F, T>,
+    'columns' | 'setColumns' | 'selectable' | 'selectRows' | 'filter'
   >;
   tableProps: TableProps<T>;
   getDataSource: (
@@ -119,18 +119,19 @@ class Template<F, T extends object = any> extends Component<
 
     this.setState({loading: true});
 
-    const res = await getDataSource(pagination, filter);
-
-    this.setState({loading: false});
-
-    const {total, rows} = res;
-    this.setState({
-      dataSource: rows,
-      pagination: {
-        ...pagination,
-        total,
-      },
-    });
+    try {
+      const res = await getDataSource(pagination, filter);
+      const {total, rows} = res;
+      this.setState({
+        dataSource: rows,
+        pagination: {
+          ...pagination,
+          total,
+        },
+      });
+    } finally {
+      this.setState({loading: false});
+    }
   }
 
   setPagination(obj: Partial<TemplatePagination>) {
@@ -156,6 +157,7 @@ class Template<F, T extends object = any> extends Component<
 
   render() {
     const {
+      filter,
       loading,
       dataSource,
       pagination,
@@ -208,6 +210,7 @@ class Template<F, T extends object = any> extends Component<
 
           <Action
             {...actionProps}
+            filter={filter}
             selectable={selectable}
             selectRows={selectedRows}
             columns={selfColumns}

@@ -4,6 +4,7 @@ import {Input, message} from 'antd';
 
 // @ts-ignore
 import {CreateModalControl} from 'env-puzzle/lib/create-modal';
+import Checkbox from 'antd/lib/checkbox/Checkbox';
 
 export interface Student {
   id: number;
@@ -115,6 +116,7 @@ const TemplateDemo: React.FC = () => {
         <Input data-required data-label="性别" data-name="gender" />
         <Input data-required data-label="班级" data-name="classNum" />
         <Input data-required data-label="学号" data-name="studentId" />
+        <Checkbox data-required data-label="单身" data-name="dog" />
       </CreateModal>
 
       <ViewModal

@@ -40,9 +40,9 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
   return (
     <Form form={form} className="env-template-filter">
       <Row gutter={80}>
-        {childArray.map((item, index) => {
-          const labelText = (item as React.ReactElement).props['data-label'];
-          const name = (item as React.ReactElement).props['data-name'];
+        {childArray.map((item: React.ReactElement, index) => {
+          const labelText = item.props['data-label'];
+          const name = item.props['data-name'];
 
           return (
             <Col

@@ -13,10 +13,16 @@ import './icon-font/iconfont';
 import Icon from './icon';
 import ImportModal from '../import-modal';
 
-export interface ActionProps<T> {
+export interface ActionProps<F, T> {
   onCreate?: () => any;
   onDelete?: (selectRows: Array<T>) => any;
-  onExport?: (type: string, selectRows?: Array<T>) => any;
+  onExport?: (
+    type: React.Key,
+    option: {
+      selectRows?: Array<T>;
+      filter: F;
+    },
+  ) => any;
   uploadUrl?: string;
   templateSrc?: string;
   onImport?: () => any;
@@ -30,12 +36,13 @@ export interface ActionProps<T> {
     onClick?: () => any;
   }>;
   columns: TableColumnType<T>;
+  filter: F;
   selectable?: boolean;
   selectRows?: Array<T>;
   setColumns: (columns: TableColumnType<T>) => any;
 }
 
-function Action<T extends object = any>(props: ActionProps<T>) {
+function Action<F, T extends object = any>(props: ActionProps<F, T>) {
   const {
     columns,
     createBtn,
@@ -52,6 +59,7 @@ function Action<T extends object = any>(props: ActionProps<T>) {
     onImport,
     selectable,
     selectRows,
+    filter,
   } = props;
 
   const [showImport, setShowImport] = useState(false);
@@ -76,16 +84,20 @@ function Action<T extends object = any>(props: ActionProps<T>) {
   );
 
   const exportMenus = (
-    <Menu>
-      <Menu.Item onClick={() => onExport('rows', selectRows)} key="rows">
+    <Menu
+      onClick={({key}) => {
+        onExport &&
+          onExport(key, {
+            filter,
+            selectRows,
+          });
+      }}
+    >
+      <Menu.Item disabled={selectRows.length === 0} key="rows">
         导出选中行
       </Menu.Item>
-      <Menu.Item onClick={() => onExport('page')} key="page">
-        导出当前页
-      </Menu.Item>
-      <Menu.Item onClick={() => onExport('all')} key="all">
-        导出全部
-      </Menu.Item>
+      <Menu.Item key="page">导出当前页</Menu.Item>
+      <Menu.Item key="all">导出全部</Menu.Item>
     </Menu>
   );
 
