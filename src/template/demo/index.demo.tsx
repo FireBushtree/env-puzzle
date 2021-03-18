@@ -80,7 +80,7 @@ const TemplateDemo: React.FC = () => {
           onDelete: (rows) => {
             console.log(rows);
           },
-          templateSrc: '/images/logo.jpg',
+          templateSrc: '/template/监测项信息导入.xls',
           uploadUrl: '/cloud/tjdx/prd/web/api/trashFeatureIndicator/import',
         }}
         getDataSource={(pagination, filter) => {

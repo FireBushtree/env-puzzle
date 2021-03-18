@@ -1,5 +1,4 @@
 import axios from 'axios';
-import download from 'downloadjs';
 import AuthUtil from './auth-util';
 
 export interface UploadFileRes {
@@ -65,7 +64,17 @@ export default class RequestUtil {
    * @param {string} url
    */
   static downloadFile(url) {
-    download(url);
+    try {
+      const iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      iframe.onload = function() {
+        document.body.removeChild(iframe);
+      };
+    } catch (e) {
+      // nothing
+    }
   }
 
   /**
