@@ -135,7 +135,12 @@ class Template<F, T extends object = any> extends Component<
         },
       });
     } finally {
-      this.setState({loading: false});
+      this.setState({
+        loading: false,
+        // 更新数据后， 清除选中的行
+        selectedRows: [],
+        selectedRowKeys: [],
+      });
     }
   }
 

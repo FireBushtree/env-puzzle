@@ -95,7 +95,7 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
                     ['is-fold']: isFold,
                   })}
                 />
-                {isFold ? '收起' : '展开'}
+                {isFold ? '展开' : '收起'}
               </Button>
             )}
           </Col>
