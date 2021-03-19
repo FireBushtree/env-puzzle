@@ -217,6 +217,7 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
 
       <ImportModal
         onOk={() => {
+          setShowImport(false);
           onImport && onImport();
         }}
         uploadUrl={uploadUrl}
