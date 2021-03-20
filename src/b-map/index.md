@@ -30,3 +30,15 @@ nav:
 
 <code src="./demo/polygon.demo" />
 
+## api
+
+`<BMap />`组件
+
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :--- | :--- | :--- | :--- | :--- |
+| className | 组件的最外层样式 | `string` | - | |
+| style | 就是style，你懂得 | `React.CSSProperties` | - | |
+| center | 地图的中心点位 | `Point` | - | |
+| zoom | 地图的缩放层级 | `number` | - | |
+| onZoomChange | 当地图缩放层级变动的回调 | `function(zoom)` | - | |
+| onCreate | 创建百度地图实例后的回调， 主要用来获取`map`实例， 进行一些操作 | `number` | - | |
