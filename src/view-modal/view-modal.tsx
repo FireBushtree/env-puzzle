@@ -21,9 +21,10 @@ const ViewModal: React.FC<ViewModalProps> = (props) => {
 
     return childArray.map((item, index) => {
       if (
-        typeof item === 'string' ||
-        typeof item === 'boolean' ||
-        typeof item === 'number'
+        item === null
+        || typeof item === 'string'
+        || typeof item === 'boolean'
+        || typeof item === 'number'
       ) {
         return;
       }

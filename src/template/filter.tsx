@@ -15,8 +15,8 @@ export interface FilterControl {
 }
 
 const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
-    props,
-    ref,
+  props,
+  ref,
 ) => {
   const {onSearch, onReset} = props;
 
@@ -27,11 +27,11 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
   // 只有当多于两个搜索条件时才展示['展开', '收起']
   const hasUnFoldButton = childArray.length > 2;
 
-  const actionOffset = isFold ?
-    childArray.length === 1 ?
-      8 :
-      0 :
-    16 - (childArray.length % 3) * 8;
+  const actionOffset = isFold
+    ? childArray.length === 1
+      ? 8
+      : 0
+    : 16 - (childArray.length % 3) * 8;
 
   useImperativeHandle(ref, () => ({
     form,
@@ -40,9 +40,10 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
   return (
     <Form form={form} className="env-template-filter">
       <Row gutter={80}>
-        {childArray.map((item, index) => {
-          const labelText = (item as React.ReactElement).props['data-label'];
-          const name = (item as React.ReactElement).props['data-name'];
+        {childArray.map((item: React.ReactElement, index) => {
+          const labelText = item.props['data-label'];
+          const name = item.props['data-name'];
+          const initialValue = item.props['data-init-value'];
 
           return (
             <Col
@@ -53,6 +54,7 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
               key={index}
             >
               <Form.Item
+                initialValue={initialValue || undefined}
                 name={name}
                 className="env-template-filter-form-item"
                 label={
@@ -93,7 +95,7 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
                     ['is-fold']: isFold,
                   })}
                 />
-                {isFold ? '收起' : '展开'}
+                {isFold ? '展开' : '收起'}
               </Button>
             )}
           </Col>

@@ -1,4 +1,15 @@
-import {Modal, Form, Col, Row, Input, Button, Tooltip, message} from 'antd';
+import {
+  Modal,
+  Form,
+  Col,
+  Row,
+  Input,
+  Button,
+  Tooltip,
+  message,
+  Checkbox,
+  InputNumber,
+} from 'antd';
 import {FormInstance} from 'antd/lib/form';
 import {ModalProps as AntdModalProps} from 'antd/lib/modal';
 import React, {forwardRef, useImperativeHandle, useRef, useState} from 'react';
@@ -35,15 +46,17 @@ const CreateModal: React.ForwardRefRenderFunction<
 
     return childArray.map((item, index) => {
       if (
-        typeof item === 'string' ||
-        typeof item === 'boolean' ||
-        typeof item === 'number'
+        item === null
+        || typeof item === 'string'
+        || typeof item === 'boolean'
+        || typeof item === 'number'
       ) {
         return;
       }
 
       const {props, type} = item as React.ReactElement;
-      const isInput = type === Input || type === Input.TextArea;
+      const isInput
+        = type === Input || type === Input.TextArea || type === InputNumber;
       const tipMessagePrefix = isInput ? '请输入' : '请选择';
 
       // 标题组件用到的props
@@ -93,10 +106,12 @@ const CreateModal: React.ForwardRefRenderFunction<
           });
         }
       }
+      const valuePropName = type === Checkbox ? 'checked' : 'value';
 
       return (
         <Col key={index} span={span || 12}>
           <Form.Item
+            valuePropName={valuePropName}
             label={<Tooltip title={label}>{label}</Tooltip>}
             name={name}
             rules={rules}

@@ -1,6 +1,7 @@
 // eslint-disable-next-line spaced-comment
 /// <reference path='./typings.d.ts' />
 
+// components
 export {default as Table} from './table';
 export {default as Scroll} from './scroll';
 export {default as Percent} from './percent';

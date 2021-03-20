@@ -62,12 +62,12 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       ctx.beginPath();
       const currentAngle = angle * i;
       ctx.moveTo(
-          circleCenterX - maxRadius * Math.cos(currentAngle),
-          circleCenterY - maxRadius * Math.sin(currentAngle),
+        circleCenterX - maxRadius * Math.cos(currentAngle),
+        circleCenterY - maxRadius * Math.sin(currentAngle),
       );
       ctx.lineTo(
-          circleCenterX - (innerRadius + clearance) * Math.cos(currentAngle),
-          circleCenterY - (innerRadius + clearance) * Math.sin(currentAngle),
+        circleCenterX - (innerRadius + clearance) * Math.cos(currentAngle),
+        circleCenterY - (innerRadius + clearance) * Math.sin(currentAngle),
       );
       ctx.shadowOffsetY = 0;
       ctx.shadowBlur = 0;
@@ -102,9 +102,9 @@ const Percent: React.FC<PercentProps> = (props: PercentProps) => {
       ctx.font = `bold 18px Arial`;
       ctx.fillStyle = THEME_COLOR;
       ctx.fillText(
-          title,
-          (ctx.canvas.width - ctx.measureText(title).width) / 2,
-          circleCenterY + 40,
+        title,
+        (ctx.canvas.width - ctx.measureText(title).width) / 2,
+        circleCenterY + 40,
       );
     }
 

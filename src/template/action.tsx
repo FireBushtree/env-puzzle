@@ -13,10 +13,19 @@ import './icon-font/iconfont';
 import Icon from './icon';
 import ImportModal from '../import-modal';
 
-export interface ActionProps<T> {
+export interface ActionProps<F, T> {
   onCreate?: () => any;
   onDelete?: (selectRows: Array<T>) => any;
-  onExport?: () => any;
+  onExport?: (
+    type: React.Key,
+    option: {
+      dataSource: Array<T>;
+      selectRows: Array<T>;
+      filter: F;
+    },
+  ) => any;
+  uploadUrl?: string;
+  templateSrc?: string;
   onImport?: () => any;
   createBtn?: boolean;
   deleteBtn?: boolean;
@@ -27,13 +36,15 @@ export interface ActionProps<T> {
     name: string;
     onClick?: () => any;
   }>;
+  dataSource: Array<T>;
   columns: TableColumnType<T>;
+  filter: F;
   selectable?: boolean;
   selectRows?: Array<T>;
   setColumns: (columns: TableColumnType<T>) => any;
 }
 
-function Action<T extends object = any>(props: ActionProps<T>) {
+function Action<F, T extends object = any>(props: ActionProps<F, T>) {
   const {
     columns,
     createBtn,
@@ -43,15 +54,18 @@ function Action<T extends object = any>(props: ActionProps<T>) {
     setColumns,
     onCreate,
     onDelete,
+    uploadUrl,
+    templateSrc,
     moreButtons,
-    // TODO: add event
-    // onExport,
-    // onImport,
+    onExport,
+    onImport,
     selectable,
     selectRows,
+    filter,
+    dataSource,
   } = props;
 
-  const [showImport, setShowImport] = useState(true);
+  const [showImport, setShowImport] = useState(false);
 
   const talbeColumnMenus = (
     <Menu>
@@ -73,8 +87,19 @@ function Action<T extends object = any>(props: ActionProps<T>) {
   );
 
   const exportMenus = (
-    <Menu>
-      <Menu.Item key="rows">导出选中行</Menu.Item>
+    <Menu
+      onClick={({key}) => {
+        onExport
+          && onExport(key, {
+            filter,
+            dataSource,
+            selectRows,
+          });
+      }}
+    >
+      <Menu.Item disabled={selectRows.length === 0} key="rows">
+        导出选中行
+      </Menu.Item>
       <Menu.Item key="page">导出当前页</Menu.Item>
       <Menu.Item key="all">导出全部</Menu.Item>
     </Menu>
@@ -95,8 +120,8 @@ function Action<T extends object = any>(props: ActionProps<T>) {
           </div>
         </Menu.Item>
       )}
-      {moreButtons?.length > 0 &&
-        moreButtons.map((item, index) => (
+      {moreButtons?.length > 0
+        && moreButtons.map((item, index) => (
           <Menu.Item
             onClick={() => {
               item.onClick && item.onClick();
@@ -190,7 +215,16 @@ function Action<T extends object = any>(props: ActionProps<T>) {
         )}
       </div>
 
-      <ImportModal visible={showImport} onCancel={() => setShowImport(false)} />
+      <ImportModal
+        onOk={() => {
+          setShowImport(false);
+          onImport && onImport();
+        }}
+        uploadUrl={uploadUrl}
+        templateSrc={templateSrc}
+        visible={showImport}
+        onCancel={() => setShowImport(false)}
+      />
     </div>
   );
 }

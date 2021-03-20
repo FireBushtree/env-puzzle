@@ -29,9 +29,9 @@ const getTypingFiles = () => {
 
     if (isDir) {
       fileStack.push(
-          ...(fs.readdirSync(absoulteFilePath) || []).map(
-              (item) => `${filePath}/${item}`,
-          ),
+        ...(fs.readdirSync(absoulteFilePath) || []).map(
+          (item) => `${filePath}/${item}`,
+        ),
       );
     } else {
       result.push(filePath);

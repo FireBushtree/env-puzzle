@@ -10,7 +10,7 @@ export interface LinePercenetProps extends PercentCommonI {
 }
 
 const LinePercenet: React.FC<LinePercenetProps> = (
-    props: LinePercenetProps,
+  props: LinePercenetProps,
 ) => {
   const {title, value, suffix, lineWidth, className, style} = props;
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -47,8 +47,8 @@ const LinePercenet: React.FC<LinePercenetProps> = (
 
     const itemColLength = 10;
     const itemColPadding = 5; // 每个小柱子的间距
-    const totalCol =
-      Math.floor(canvasWidth / (itemColLength + itemColPadding)) - 1;
+    const totalCol
+      = Math.floor(canvasWidth / (itemColLength + itemColPadding)) - 1;
     const perValue = 100 / totalCol;
     const activeValueCount = Math.floor(value / perValue);
 

@@ -31,15 +31,15 @@ export interface MarkerClusterProps {
 }
 
 const MarkerCluster: React.FC<MarkerClusterProps> = (
-    props: MarkerClusterProps,
+  props: MarkerClusterProps,
 ) => {
   const {map, markerIcon, markerClusterIcon, points, onMarkerClick} = props;
 
   React.useEffect(() => {
     const markers: Array<typeof window.BMap.Marker> = [];
     const myIcon = new window.BMap.Icon(
-        markerIcon.url,
-        new window.BMap.Size(markerIcon.width, markerIcon.height),
+      markerIcon.url,
+      new window.BMap.Size(markerIcon.width, markerIcon.height),
     );
 
     let markerClusterer: any = undefined;
@@ -62,8 +62,8 @@ const MarkerCluster: React.FC<MarkerClusterProps> = (
         {
           url: markerClusterIcon.url,
           size: new window.BMap.Size(
-              markerClusterIcon.width,
-              markerClusterIcon.height,
+            markerClusterIcon.width,
+            markerClusterIcon.height,
           ),
         },
       ],

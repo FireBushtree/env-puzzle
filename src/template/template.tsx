@@ -14,8 +14,13 @@ export interface TemplatePagination {
 
 export interface TemplateProps<F, T> {
   actionProps?: Omit<
-    ActionProps<T>,
-    'columns' | 'setColumns' | 'selectable' | 'selectRows'
+    ActionProps<F, T>,
+    | 'columns'
+    | 'setColumns'
+    | 'selectable'
+    | 'selectRows'
+    | 'filter'
+    | 'dataSource'
   >;
   tableProps: TableProps<T>;
   getDataSource: (
@@ -104,12 +109,12 @@ class Template<F, T extends object = any> extends Component<
   updateFilter() {
     const filter = this.filterRef.form.getFieldsValue();
     this.setState(
-        {
-          filter,
-        },
-        () => {
-          this.requestDataSource();
-        },
+      {
+        filter,
+      },
+      () => {
+        this.requestDataSource();
+      },
     );
   }
 
@@ -119,31 +124,37 @@ class Template<F, T extends object = any> extends Component<
 
     this.setState({loading: true});
 
-    const res = await getDataSource(pagination, filter);
-
-    this.setState({loading: false});
-
-    const {total, rows} = res;
-    this.setState({
-      dataSource: rows,
-      pagination: {
-        ...pagination,
-        total,
-      },
-    });
+    try {
+      const res = await getDataSource(pagination, filter);
+      const {total, rows} = res;
+      this.setState({
+        dataSource: rows,
+        pagination: {
+          ...pagination,
+          total,
+        },
+      });
+    } finally {
+      this.setState({
+        loading: false,
+        // 更新数据后， 清除选中的行
+        selectedRows: [],
+        selectedRowKeys: [],
+      });
+    }
   }
 
   setPagination(obj: Partial<TemplatePagination>) {
     this.setState(
-        {
-          pagination: {
-            ...this.state.pagination,
-            ...obj,
-          },
+      {
+        pagination: {
+          ...this.state.pagination,
+          ...obj,
         },
-        () => {
-          this.requestDataSource();
-        },
+      },
+      () => {
+        this.requestDataSource();
+      },
     );
   }
 
@@ -156,6 +167,7 @@ class Template<F, T extends object = any> extends Component<
 
   render() {
     const {
+      filter,
       loading,
       dataSource,
       pagination,
@@ -208,6 +220,8 @@ class Template<F, T extends object = any> extends Component<
 
           <Action
             {...actionProps}
+            dataSource={dataSource}
+            filter={filter}
             selectable={selectable}
             selectRows={selectedRows}
             columns={selfColumns}
@@ -226,8 +240,8 @@ class Template<F, T extends object = any> extends Component<
           <Table
             loading={loading}
             rowSelection={
-              selectable ?
-                {
+              selectable
+                ? {
                   ...rowSelection,
                   selectedRowKeys: selectedRowKeys,
                   onChange: (selectedRowKeys, selectedRows) => {
@@ -236,8 +250,8 @@ class Template<F, T extends object = any> extends Component<
                       selectedRows,
                     });
                   },
-                } :
-                undefined
+                }
+                : undefined
             }
             rowKey="id"
             pagination={{
