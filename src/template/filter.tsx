@@ -15,8 +15,8 @@ export interface FilterControl {
 }
 
 const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
-    props,
-    ref,
+  props,
+  ref,
 ) => {
   const {onSearch, onReset} = props;
 
@@ -27,11 +27,11 @@ const Filter: React.ForwardRefRenderFunction<FilterControl, FilterProps> = (
   // 只有当多于两个搜索条件时才展示['展开', '收起']
   const hasUnFoldButton = childArray.length > 2;
 
-  const actionOffset = isFold ?
-    childArray.length === 1 ?
-      8 :
-      0 :
-    16 - (childArray.length % 3) * 8;
+  const actionOffset = isFold
+    ? childArray.length === 1
+      ? 8
+      : 0
+    : 16 - (childArray.length % 3) * 8;
 
   useImperativeHandle(ref, () => ({
     form,

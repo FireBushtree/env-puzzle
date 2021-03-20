@@ -44,10 +44,10 @@ export default class RequestUtil {
     for (const key in params) {
       if (params[key] !== null && params[key] !== undefined) {
         const inputDom = document.createElement('input');
-        const value =
-          typeof params[key] === 'object' ?
-            JSON.stringify(params[key]) :
-            params[key];
+        const value
+          = typeof params[key] === 'object'
+            ? JSON.stringify(params[key])
+            : params[key];
         inputDom.setAttribute('type', 'hidden');
         inputDom.setAttribute('name', key);
         inputDom.setAttribute('value', value);
@@ -86,29 +86,29 @@ export default class RequestUtil {
   static uploadFile(url: string, formData: FormData) {
     return new Promise<UploadFileRes>((resolve, reject) =>
       axios
-          .request<UploadFileRes>({
-            method: 'POST',
-            url: url,
-            headers: {
-              access_token: AuthUtil.getToken(),
-            },
-            params: {
-              tenantId: AuthUtil.getTenantId(),
-              userId: AuthUtil.getUserId(),
-            },
-            data: formData,
-          })
-          .then((res) => {
-            if (res.data.result === 1) {
-              reject(res.data);
-              return;
-            }
+        .request<UploadFileRes>({
+          method: 'POST',
+          url: url,
+          headers: {
+            access_token: AuthUtil.getToken(),
+          },
+          params: {
+            tenantId: AuthUtil.getTenantId(),
+            userId: AuthUtil.getUserId(),
+          },
+          data: formData,
+        })
+        .then((res) => {
+          if (res.data.result === 1) {
+            reject(res.data);
+            return;
+          }
 
-            resolve(res.data);
-          })
-          .catch((error) => {
-            reject(error);
-          }),
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(error);
+        }),
     );
   }
 }

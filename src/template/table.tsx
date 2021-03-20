@@ -31,10 +31,10 @@ export interface TableProps<T> extends Omit<AntTableProps<T>, 'columns'> {
 }
 
 function handleActionButtonClick<T>(
-    button: ActionButton<T>,
-    text: string,
-    record: T,
-    index: number,
+  button: ActionButton<T>,
+  text: string,
+  record: T,
+  index: number,
 ) {
   if (button.name === '删除') {
     Modal.confirm({
@@ -68,8 +68,8 @@ function Table<T extends object = any>(props: TableProps<T>) {
   const wrapHeight = size.height;
 
   React.useEffect(() => {
-    const tbodyHeight =
-      wrapRef.current?.querySelector('.ant-table-tbody')?.clientHeight || 0;
+    const tbodyHeight
+      = wrapRef.current?.querySelector('.ant-table-tbody')?.clientHeight || 0;
 
     // 为什么是减去 55 和 96 ?
     // 55 是表头的高度

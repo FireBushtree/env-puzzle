@@ -79,8 +79,8 @@ class Marker extends Component<MarkerProps, MarkerState> {
     if (children) {
       const contentDom = document.createElement('div');
       render(
-          <div className="eh-bmap-marker__point">{children}</div>,
-          contentDom,
+        <div className="eh-bmap-marker__point">{children}</div>,
+        contentDom,
       );
       const CustomOverlay = getCustomOverlay(window.BMap.Overlay);
       this.marker = new CustomOverlay({lng, lat}, contentDom, {zIndex});
@@ -95,8 +95,8 @@ class Marker extends Component<MarkerProps, MarkerState> {
 
       if (icon) {
         const myIcon = new window.BMap.Icon(
-            icon.url,
-            new window.BMap.Size(icon.width, icon.height),
+          icon.url,
+          new window.BMap.Size(icon.width, icon.height),
         );
 
         markerOptions.icon = myIcon;

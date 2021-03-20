@@ -109,12 +109,12 @@ class Template<F, T extends object = any> extends Component<
   updateFilter() {
     const filter = this.filterRef.form.getFieldsValue();
     this.setState(
-        {
-          filter,
-        },
-        () => {
-          this.requestDataSource();
-        },
+      {
+        filter,
+      },
+      () => {
+        this.requestDataSource();
+      },
     );
   }
 
@@ -146,15 +146,15 @@ class Template<F, T extends object = any> extends Component<
 
   setPagination(obj: Partial<TemplatePagination>) {
     this.setState(
-        {
-          pagination: {
-            ...this.state.pagination,
-            ...obj,
-          },
+      {
+        pagination: {
+          ...this.state.pagination,
+          ...obj,
         },
-        () => {
-          this.requestDataSource();
-        },
+      },
+      () => {
+        this.requestDataSource();
+      },
     );
   }
 
@@ -240,8 +240,8 @@ class Template<F, T extends object = any> extends Component<
           <Table
             loading={loading}
             rowSelection={
-              selectable ?
-                {
+              selectable
+                ? {
                   ...rowSelection,
                   selectedRowKeys: selectedRowKeys,
                   onChange: (selectedRowKeys, selectedRows) => {
@@ -250,8 +250,8 @@ class Template<F, T extends object = any> extends Component<
                       selectedRows,
                     });
                   },
-                } :
-                undefined
+                }
+                : undefined
             }
             rowKey="id"
             pagination={{

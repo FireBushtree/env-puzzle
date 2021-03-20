@@ -71,9 +71,9 @@ class InternalBMap extends React.Component<
     }
 
     if (
-      prevProps.zoom !== zoom &&
-      this.mapInstance &&
-      this.mapInstance.getZoom() !== zoom
+      prevProps.zoom !== zoom
+      && this.mapInstance
+      && this.mapInstance.getZoom() !== zoom
     ) {
       this.mapInstance.setZoom(zoom);
     }
@@ -88,21 +88,21 @@ class InternalBMap extends React.Component<
   async init() {
     if (!window.BMap) {
       await DomUtil.loadJavascript(
-          'http://api.map.baidu.com/getscript?v=3.0&ak=42IughV5lDxAt0wI8AhDVuGR',
+        'http://api.map.baidu.com/getscript?v=3.0&ak=42IughV5lDxAt0wI8AhDVuGR',
       );
 
       await DomUtil.loadJavascript(
-          'https://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js',
+        'https://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js',
       );
 
       await DomUtil.loadJavascript(
-          'https://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js',
+        'https://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js',
       );
 
       // eslint-disable-next-line max-len
       window.BMap.Map.prototype.customSetMapCenter = function customSetMapCenter(
-          lng: number,
-          lat: number,
+        lng: number,
+        lat: number,
       ) {
         const point = new window.BMap.Point(lng, lat);
         this.setCenter(point);
@@ -154,9 +154,9 @@ class InternalBMap extends React.Component<
       }
 
       if (
-        typeof child === 'string' ||
-        typeof child === 'number' ||
-        typeof child === 'boolean'
+        typeof child === 'string'
+        || typeof child === 'number'
+        || typeof child === 'boolean'
       ) {
         return child;
       }

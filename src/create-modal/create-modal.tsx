@@ -46,17 +46,17 @@ const CreateModal: React.ForwardRefRenderFunction<
 
     return childArray.map((item, index) => {
       if (
-        item === null ||
-        typeof item === 'string' ||
-        typeof item === 'boolean' ||
-        typeof item === 'number'
+        item === null
+        || typeof item === 'string'
+        || typeof item === 'boolean'
+        || typeof item === 'number'
       ) {
         return;
       }
 
       const {props, type} = item as React.ReactElement;
-      const isInput =
-        type === Input || type === Input.TextArea || type === InputNumber;
+      const isInput
+        = type === Input || type === Input.TextArea || type === InputNumber;
       const tipMessagePrefix = isInput ? '请输入' : '请选择';
 
       // 标题组件用到的props

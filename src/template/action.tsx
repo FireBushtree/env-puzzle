@@ -89,8 +89,8 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
   const exportMenus = (
     <Menu
       onClick={({key}) => {
-        onExport &&
-          onExport(key, {
+        onExport
+          && onExport(key, {
             filter,
             dataSource,
             selectRows,
@@ -120,8 +120,8 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
           </div>
         </Menu.Item>
       )}
-      {moreButtons?.length > 0 &&
-        moreButtons.map((item, index) => (
+      {moreButtons?.length > 0
+        && moreButtons.map((item, index) => (
           <Menu.Item
             onClick={() => {
               item.onClick && item.onClick();

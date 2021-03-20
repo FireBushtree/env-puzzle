@@ -24,6 +24,14 @@ module.exports = {
     'linebreak-style': [0],
     'require-jsdoc': [0],
     'react/prop-types': [0],
+    'indent': [
+      'error',
+      2,
+      {
+        ObjectExpression: 1,
+      },
+    ],
+    'operator-linebreak': ['error', 'before'],
   },
   overrides: [
     {

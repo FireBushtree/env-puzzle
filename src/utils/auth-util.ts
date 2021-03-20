@@ -20,10 +20,10 @@ export default class AuthUtil {
 
   static getToken() {
     return (
-      StringUtil.getUrlParam(TOKEN) ||
-      StringUtil.getUrlParam(ACCESS_TOKEN) ||
-      localStorage.getItem(TOKEN) ||
-      localStorage.getItem(ACCESS_TOKEN)
+      StringUtil.getUrlParam(TOKEN)
+      || StringUtil.getUrlParam(ACCESS_TOKEN)
+      || localStorage.getItem(TOKEN)
+      || localStorage.getItem(ACCESS_TOKEN)
     );
   }
 }

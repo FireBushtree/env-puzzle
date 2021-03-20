@@ -30,8 +30,8 @@ const LuShu: React.FC<LuShuProps> = (props: LuShuProps) => {
     const lushu = new window.BMapLib.LuShu(map, path, {
       landmarkPois: [],
       icon: new window.BMap.Icon(
-          icon?.url,
-          new window.BMap.Size(icon?.width, icon?.height),
+        icon?.url,
+        new window.BMap.Size(icon?.width, icon?.height),
       ),
       defaultContent: '',
       enableRotation: true,
