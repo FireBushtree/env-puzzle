@@ -8,5 +8,6 @@
 
 ## ToDo
 
-* [x] add line percent
-* [ ] fix error aggregation js file
+* [ ] add import-modal doc
+* [ ] add create-modal doc
+* [ ] add view-modal doc

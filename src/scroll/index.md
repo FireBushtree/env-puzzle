@@ -1,5 +1,6 @@
 ---
 title: Scroll
+toc: menu
 nav:
   path: '/component'
   title: 组件

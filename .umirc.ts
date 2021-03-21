@@ -32,14 +32,21 @@ export default defineConfig({
     ],
     '/component': [
       {
-        title: '组件',
+        title: 'dashboard',
         children: [
           'table/index.md',
           'scroll/index.md',
           'percent/index.md',
           'b-map/index.md',
-          'to-map/index.md',
+        ],
+      },
+      {
+        title: 'CRUD',
+        children: [
           'template/index.md',
+          'view-modal/index.md',
+          'import-modal/index.md',
+          'to-map/index.md',
         ],
       },
     ],
