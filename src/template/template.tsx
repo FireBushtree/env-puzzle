@@ -6,6 +6,12 @@ import CheckRow from './check-row';
 import Filter, {FilterControl} from './filter';
 import Table, {TableColumnType, TableProps} from './table';
 
+const DEFAULT_PAGINATION = {
+  total: 0,
+  current: 1,
+  pageSize: 10,
+};
+
 export interface TemplatePagination {
   total: number;
   current: number;
@@ -79,11 +85,7 @@ class Template<F, T extends object = any> extends Component<
     selfColumns: [],
     selectedRowKeys: [],
     selectedRows: [],
-    pagination: {
-      total: 0,
-      current: 1,
-      pageSize: 10,
-    },
+    pagination: DEFAULT_PAGINATION,
   } as TemplateState<F, T>;
 
   componentDidMount() {
@@ -107,10 +109,18 @@ class Template<F, T extends object = any> extends Component<
   }
 
   updateFilter() {
+    const {pagination} = this.state;
     const filter = this.filterRef.form.getFieldsValue();
+
+    // 更新查询条件并且把分页信息重置
     this.setState(
       {
         filter,
+        pagination: {
+          ...pagination,
+          current: 1,
+          total: 0,
+        },
       },
       () => {
         this.requestDataSource();
