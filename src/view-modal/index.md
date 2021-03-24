@@ -28,5 +28,4 @@ nav:
 | :--- | :--- | :--- | :--- | :--- |
 | data-span | 该字段的长度， 可以参考栅格的`span`， 1 ~ 24之间 | `number` | - | |
 | data-label | 该字段的名称 | `React.ReactNode` | - | |
-| data-value | 该字段的值 | `React.ReactNode` | - | |
 | data-title | 将下面的字段分组展示， 该字段会默认充满一行 | `React.ReactNode` | - | |
