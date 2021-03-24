@@ -1,6 +1,7 @@
 **/*.md
 lib
 es
+.eslintrc.js
 .umi
 .gitignore
 coverage

@@ -84,7 +84,7 @@ const TemplateDemo: React.FC = () => {
           uploadUrl: '/cloud/tjdx/prd/web/api/trashFeatureIndicator/import',
         }}
         getDataSource={(pagination, filter) => {
-          console.log(filter);
+          console.log(pagination);
           return new Promise((resolve, reject) => {
             resolve({
               total: 100,

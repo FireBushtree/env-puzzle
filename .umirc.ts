@@ -32,7 +32,7 @@ export default defineConfig({
     ],
     '/component': [
       {
-        title: 'dashboard',
+        title: 'DASHBOARD',
         children: [
           'table/index.md',
           'scroll/index.md',
