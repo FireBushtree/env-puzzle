@@ -8,6 +8,6 @@
 
 ## ToDo
 
-* [ ] add import-modal doc
-* [ ] add create-modal doc
-* [ ] add view-modal doc
+* [x] add import-modal doc
+* [*] add create-modal doc
+* [x] add view-modal doc
