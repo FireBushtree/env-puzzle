@@ -45,6 +45,7 @@ export default defineConfig({
         children: [
           'template/index.md',
           'view-modal/index.md',
+          'create-modal/index.md',
           'import-modal/index.md',
           'to-map/index.md',
         ],
