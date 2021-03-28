@@ -1,4 +1,5 @@
 import React from 'react';
+import './icon-font/iconfont';
 
 export interface IconProps {
   name: string;

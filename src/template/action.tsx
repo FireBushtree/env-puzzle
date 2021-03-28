@@ -9,7 +9,6 @@ import {Button, Checkbox, Menu, Modal, Popover} from 'antd';
 import React, {useState} from 'react';
 import {cloneDeep} from 'lodash';
 import {TableColumnType} from './table';
-import './icon-font/iconfont';
 import Icon from './icon';
 import ImportModal from '../import-modal';
 
