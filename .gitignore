@@ -6,6 +6,7 @@ env-puzzle-typings
 yarn-error.log
 .umi
 .idea
+coverage
 
 dist
 dist.zip

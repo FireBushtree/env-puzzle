@@ -1,17 +1,26 @@
 version: 2.1
-orbs:
-  react: 'thefrontside/react@0.2.0'
-workflows:
-  push:
-    jobs:
-      - react/install
-      - react/eslint:
-          requires:
-            - react/install
-      - react/test:
-          requires:
-            - react/install
-      - react/coverage:
-          requires:
-            - react/install
 
+orbs:
+  node: circleci/node@1.1.6
+
+jobs:
+  build-ant-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - restore_cache:
+                key: v1-node-modules-{{ checksum "yarn.lock" }}
+            - run: yarn
+            - run: yarn test
+            - save_cache:
+                key: v1-node-modules-{{ checksum "yarn.lock" }}
+                paths:
+                - ~/project/node_modules
+
+workflows:
+  build-and-test:
+    jobs:
+      - build-ant-test
