@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CheckRow from '../check-row';
-import {render} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 
 const CHECK_ROW_CLASS = 'env-template-check-row';
 
@@ -21,5 +21,19 @@ describe('<CheckRow />', () => {
 
     expect(container.querySelector(`.${CHECK_ROW_CLASS}.is-hide`)).toBeFalsy();
     expect(container.querySelector(`.${CHECK_ROW_CLASS}`)).toBeTruthy();
+  });
+
+  test('on clear', () => {
+    const clearFn = jest.fn();
+
+    const {container, rerender} = render(
+      <CheckRow selectedRows={[{name: 'owen'}]} clearSelectedRows={clearFn} />,
+    );
+
+    fireEvent.click(screen.getByText('清空'));
+    rerender(<CheckRow selectedRows={[]} clearSelectedRows={clearFn} />);
+
+    expect(container.querySelector(`.${CHECK_ROW_CLASS}.is-hide`)).toBeTruthy();
+    clearFn.mock.calls.length = 1;
   });
 });
