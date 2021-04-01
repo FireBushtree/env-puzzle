@@ -14,7 +14,7 @@ jobs:
             - restore_cache:
                 key: v1-node-modules-{{ checksum "yarn.lock" }}
             - run: yarn
-            - run: yarn test
+            - run: yarn test:coverage
             - run:
                 name: report coverage
                 command: |
