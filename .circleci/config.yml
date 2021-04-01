@@ -15,6 +15,12 @@ jobs:
                 key: v1-node-modules-{{ checksum "yarn.lock" }}
             - run: yarn
             - run: yarn test
+            - run:
+                name: report coverage
+                command: |
+                  if [[ -z $CI_PULL_REQUEST ]]; then
+                    ./node_modules/.bin/codecov
+                  fi
             - save_cache:
                 key: v1-node-modules-{{ checksum "yarn.lock" }}
                 paths:
