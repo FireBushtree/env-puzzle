@@ -9,5 +9,5 @@
 ## ToDo
 
 * [x] add import-modal doc
-* [*] add create-modal doc
+* [x] add create-modal doc
 * [x] add view-modal doc

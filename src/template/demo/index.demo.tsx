@@ -76,6 +76,7 @@ const TemplateDemo: React.FC = () => {
           ],
         }}
         actionProps={{
+          moreButtons: [{name: '绑定信息', onClick: () => {}}],
           onCreate: () => setShowCreate(true),
           onDelete: (rows) => {
             console.log(rows);
