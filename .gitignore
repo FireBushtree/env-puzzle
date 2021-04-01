@@ -3,7 +3,6 @@ lib
 node_modules
 env-puzzle-typings
 
-yarn.lock
 yarn-error.log
 .umi
 .idea
