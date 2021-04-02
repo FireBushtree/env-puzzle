@@ -24,7 +24,7 @@ jobs:
             - save_cache:
                 key: v1-node-modules-{{ checksum "yarn.lock" }}
                 paths:
-                - ~/project/node_modules
+                  - ~/project/node_modules
 
 workflows:
   build-and-test:

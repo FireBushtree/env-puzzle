@@ -12,4 +12,5 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/lib/', '/es/', '/dist/'],
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['./jest.setup.js'],
 };
