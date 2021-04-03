@@ -3,7 +3,8 @@
     "baseUrl": "./",
     "paths": {
       "env-puzzle": ["src"],
-      "@/src/*": ["src/*"]
+      "@/src/*": ["src/*"],
+      "@/tests/*": ["tests/*"],
     },
     "declaration": true,
     "plugins": [
@@ -18,6 +19,6 @@
     "lib": ["dom", "es2017"],
     "skipLibCheck": true,
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "lib", "es"]
 }

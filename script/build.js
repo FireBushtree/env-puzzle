@@ -59,7 +59,8 @@ const getTypingFiles = () => {
 
   // 3. 去除typings文件夹下多余的demo文件
   await rimraf(`${TYPEINGS_FOLDER}/**/demo`, {}, () => {});
-  console.log('remove useless file success');
+  await rimraf(`${TYPEINGS_FOLDER}/tests`, {}, () => {});
+  console.log('remove useless demo & tests file success');
 
   // 4. 生成打包后的文件
   await execa('npx father-build');
@@ -79,8 +80,9 @@ const getTypingFiles = () => {
   // 8. 替换打包后的声明文件
   const typingFiles = getTypingFiles();
   typingFiles.forEach((item) => {
-    fs.copyFileSync(`${typeRootDir}/${item}`, `${libRootDir}/${item}`);
-    fs.copyFileSync(`${typeRootDir}/${item}`, `${esRootDir}/${item}`);
+    const targetFile = item.replace(/src/, '');
+    fs.copyFileSync(`${typeRootDir}/${item}`, `${libRootDir}/${targetFile}`);
+    fs.copyFileSync(`${typeRootDir}/${item}`, `${esRootDir}/${targetFile}`);
   });
 
   // 9. 清除声明文件夹的包
