@@ -1,5 +1,7 @@
 # env-puzzle
 
+[![codecov](https://codecov.io/gh/FireBushtree/env-puzzle/branch/master/graph/badge.svg?token=7FAMWVIJJW)](https://codecov.io/gh/FireBushtree/env-puzzle)
+
 ## How to contribute
 
 * clone this repo
