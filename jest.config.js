@@ -3,6 +3,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less|scss|png)$': 'jest-transform-stub',
     '^tests(.*)$': '<rootDir>/tests$1',
+    '^@/tests(.*)$': '<rootDir>/tests$1',
   },
   transform: {
     '^.+\\.{tsx|ts}?$': 'ts-jest',

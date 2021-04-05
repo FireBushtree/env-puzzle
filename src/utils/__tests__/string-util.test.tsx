@@ -1,16 +1,5 @@
 import StringUtil from '../string-util';
-
-const mockLocationHref = (url) => {
-  delete window.location;
-  global.window = Object.create(window);
-  Object.defineProperty(window, 'location', {
-    configurable: true,
-    enumerable: true,
-    value: {
-      href: url,
-    },
-  });
-};
+import {mockLocationHref} from '@/tests/utils';
 
 describe('string-util', () => {
   test('getUrlParam', () => {
