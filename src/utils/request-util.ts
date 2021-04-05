@@ -26,6 +26,7 @@ export default class RequestUtil {
     const name = 'downloadFileIframe';
 
     const existDownloadIframe = document.getElementsByName(name)[0];
+
     if (!existDownloadIframe) {
       const iframeDom = document.createElement('iframe');
       iframeDom.setAttribute('name', name);
