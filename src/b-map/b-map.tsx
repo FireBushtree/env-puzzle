@@ -116,6 +116,31 @@ class InternalBMap extends React.Component<
       enableMapClick: false,
     });
 
+    // 创建搜索工具， 使得可以直接使用map搜索
+    const localSearch = (keyword: string, callback: (result: any) => any) => {
+      const searchInstance = new window.BMap.LocalSearch(map, {
+        // 智能搜索
+        onSearchComplete: callback,
+      });
+      searchInstance.search(keyword);
+    };
+
+    map.localSearch = localSearch;
+
+    // 创建地址解析工具, 通过经纬度查询到位置信息
+    const geocoder = (point: Point, callback: (result: any) => any) => {
+      const myGeo = new window.BMap.Geocoder({
+        extensions_town: true,
+      });
+
+      const {lng, lat} = point;
+
+      // 根据坐标得到地址描述
+      myGeo.getLocation(new window.BMap.Point(lng, lat), callback);
+    };
+
+    map.geocoder = geocoder;
+
     this.mapInstance = map;
     this.setState({map: this.mapInstance});
 

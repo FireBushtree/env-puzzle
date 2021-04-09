@@ -15,7 +15,7 @@ import classnames from 'classnames';
 
 export interface ExportAttributes {
   map: any;
-  setSelfValue: (point: Point) => any;
+  setCenter: (value: Point) => any;
 }
 
 export interface ContainerProps {
@@ -29,17 +29,24 @@ export interface ContainerProps {
    */
   headerBtns?: React.ReactNode;
 
+  onOk?: () => any;
+
   /**
    * 当点位切换时的事件
    */
   onChange?: (point: Point) => any;
+
+  /**
+   * 子元素
+   */
+  children: React.ReactNode;
 }
 
 const Container: React.ForwardRefRenderFunction<
   ExportAttributes,
   ContainerProps
 > = (props: ContainerProps, ref) => {
-  const {headerBtns, onChange, onMapCreate} = props;
+  const {headerBtns, onChange, onMapCreate, children, onOk} = props;
 
   /**
    * 地图实例
@@ -69,12 +76,7 @@ const Container: React.ForwardRefRenderFunction<
   /**
    * 地图中心点
    */
-  const [center, setCenter] = useState<Point>(BMap.defaultCenter);
-
-  /**
-   * 选点位的点的值
-   */
-  const [selfValue, setSelfValue] = useState<Point>(BMap.defaultCenter);
+  const [center, setCenter] = useState<Point>(props.center);
 
   /**
    * 搜索区域实例
@@ -96,13 +98,12 @@ const Container: React.ForwardRefRenderFunction<
   }, [currentPoint]);
 
   const handlePointMove = (point: Point) => {
-    setSelfValue(point);
     onChange && onChange(point);
   };
 
   useImperativeHandle(ref, () => ({
     map,
-    setSelfValue: handlePointMove,
+    setCenter,
   }));
 
   return (
@@ -119,6 +120,7 @@ const Container: React.ForwardRefRenderFunction<
 
       <Modal
         onOk={() => {
+          onOk();
           setShowMap(false);
         }}
         onCancel={() => {
@@ -255,7 +257,11 @@ const Container: React.ForwardRefRenderFunction<
             {currentPoint && (
               <BMap.Marker
                 zIndex={1}
-                onDragend={() => {}}
+                onDragend={() => {
+                  onChange({
+                    ...currentPoint.point,
+                  });
+                }}
                 lng={currentPoint.point.lng}
                 lat={currentPoint.point.lat}
               >
@@ -265,23 +271,7 @@ const Container: React.ForwardRefRenderFunction<
               </BMap.Marker>
             )}
 
-            <BMap.Marker
-              zIndex={1}
-              offset={{
-                width: 0,
-                height: -15,
-              }}
-              onDragend={(lng, lat) => {
-                handlePointMove({lng, lat});
-              }}
-              lng={selfValue?.lng || center.lng}
-              lat={selfValue?.lat || center.lat}
-              icon={{
-                url: require('./images/icon-picker.png'),
-                width: 30,
-                height: 30,
-              }}
-            />
+            {children}
           </BMap>
         </div>
       </Modal>
