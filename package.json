@@ -1,10 +1,13 @@
 {
   "name": "env-puzzle",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "main": "lib/index.js",
   "module": "es/index.js",
   "description": "Envcloud frontend accumulation",
   "license": "MIT",
+  "author": {
+    "name": "FireBushtree"
+  },
   "scripts": {
     "dev": "dumi dev",
     "build:doc": "dumi build",
@@ -18,6 +21,7 @@
     "test:coverage": "jest --coverage",
     "test:update": "jest --updateSnapshot"
   },
+  "repository": "git@github.com:FireBushtree/env-puzzle.git",
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
