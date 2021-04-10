@@ -4,6 +4,12 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "description": "Envcloud frontend accumulation",
+  "keywords": [
+    "design",
+    "env-cloud",
+    "frontend",
+    "react-components"
+  ],
   "license": "MIT",
   "author": {
     "name": "FireBushtree"
