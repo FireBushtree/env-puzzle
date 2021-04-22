@@ -45,6 +45,26 @@ import { Percent } from 'env-puzzle';
 ```
 插件会帮你转换成 env-puzzle/lib/xxx 的写法。另外此插件配合 style 属性可以做到模块样式的按需自动加载。
 
+由于基于`antd`， 所以在使用`babel-plugin-import`引入`antd`的时候， 需要配置`{ ..., libraryDirectory: 'es', }`
+完整代码如下
+```javascript
+extraBabelPlugins: [
+  [
+    'import',
+    { libraryName: 'antd', libraryDirectory: 'es', style: 'css' },
+    'antd',
+  ],
+  [
+    'import',
+    {
+      libraryName: 'env-puzzle',
+      style: 'css'
+    },
+    'env-puzzle',
+  ],
+]
+```
+
 ## 💻-示例
 
 ```javascript
