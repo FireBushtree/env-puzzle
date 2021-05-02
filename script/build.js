@@ -49,7 +49,7 @@ const getTypingFiles = () => {
 
   // 1. 使用ttypescript 生成 .d.ts文件
   console.log('start generate declaration folder');
-  await execa(`npx ttsc --outDir ${TYPEINGS_FOLDER}`);
+  await execa(`ttsc --outDir ${TYPEINGS_FOLDER}`);
   console.log('generate declaration folder success');
 
   console.log('start remove declaration folder useless file');
@@ -63,7 +63,7 @@ const getTypingFiles = () => {
   console.log('remove useless demo & tests file success');
 
   // 4. 生成打包后的文件
-  await execa('npx father-build');
+  await execa('father-build');
 
   // 5. 去除打包后的demo文件
   await remove('lib/**/demo', 'lib', 'demo');
