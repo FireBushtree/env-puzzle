@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ImportModal} from 'env-puzzle';
 import {Button} from 'antd';
 
-const ImportModalDemo: React.FC = (props) => {
+const ImportModalDemo: React.FC = () => {
   const [showImport, setShowImport] = useState(false);
 
   return (
