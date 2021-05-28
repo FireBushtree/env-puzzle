@@ -21,6 +21,13 @@ nav:
 
 <code src="./demo/index.demo" />
 
+## api
+
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :--- | :--- | :--- | :--- | :--- |
+| extraFooter | 模态框底部的额外按钮 | `Array<React.ReactNode>` | `[]` | |
+
+
 ## 子元素api
 
 `props`可以参考`antd`的modal。
@@ -29,7 +36,7 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | data-required | 字段是否必填 | `boolean` | - | |
-| data-span | 该字段的长度， 可以参考栅格的`span`， 1 ~ 24之间 | `number` | - | |
+| data-span | 该字段的长度， 可以参考栅格的`span`， 1 ~ 24之间 | `number` | 12 | |
 | data-label | 该字段的名称 | `React.ReactNode` | - | |
 | data-name | 该字段在表单中的值的键 | `string` | - | |
 | data-title | 将下面的字段分组展示， 该字段会默认充满一行 | `React.ReactNode` | - | |

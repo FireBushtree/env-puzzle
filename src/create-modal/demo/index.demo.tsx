@@ -17,6 +17,11 @@ const CreateModalDemo: React.FC = () => {
           console.log(fields);
         }}
         onCancel={() => setShowCreate(false)}
+        extraFooter={[
+          <Button key="unbind" danger>
+            解绑
+          </Button>,
+        ]}
       >
         <div data-title="基本信息" />
         <Input data-required data-label="姓名" data-name="username" />

@@ -18,6 +18,7 @@ export interface CreateModalProps extends AntdModalProps {
   onSave?: (formData: any) => any;
   onReset?: () => any;
   children?: React.ReactNode;
+  extraFooter?: Array<React.ReactNode>;
 }
 
 export interface CreateModalControl {
@@ -28,7 +29,7 @@ const CreateModal: React.ForwardRefRenderFunction<
   CreateModalControl,
   CreateModalProps
 > = (props, ref) => {
-  const {children, visible, onSave, onReset, ...rest} = props;
+  const {children, visible, onSave, onReset, extraFooter = [], ...rest} = props;
   const [form] = Form.useForm();
   const formRef = useRef(null);
   const [saving, setSaving] = useState(false);
@@ -157,6 +158,7 @@ const CreateModal: React.ForwardRefRenderFunction<
         <Button disabled={saving} key="clear" onClick={handleReset}>
           清空
         </Button>,
+        ...extraFooter,
         <Button loading={saving} key="save" type="primary" onClick={handleSave}>
           保存
         </Button>,
