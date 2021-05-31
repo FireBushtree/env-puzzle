@@ -4,6 +4,7 @@ import IgnoreNotFoundExportPlugin from './webpack-plugins/ignore-not-found-expor
 
 export default defineConfig({
   // logo: '/images/logo.jpg',
+  hash: true,
   mode: 'site',
   alias: {
     'env-puzzle': path.resolve(__dirname, './src'),
