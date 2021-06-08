@@ -5,6 +5,7 @@ import InternalBMap, {
   InternalBMapProps,
 } from './b-map';
 import Marker from './marker';
+import Drawing from './drawing';
 import Polygon from './polygon';
 import MarkerClusterer from './marker-clusterer';
 
@@ -14,6 +15,7 @@ interface BMapI extends InternalBMapT {
   defaultZoom: number;
   Marker: typeof Marker;
   Polygon: typeof Polygon;
+  Drawing: typeof Drawing;
   MarkerClusterer: typeof MarkerClusterer;
 }
 
@@ -22,6 +24,7 @@ BMap.defaultCenter = defaultCenter;
 BMap.defaultZoom = defaultZoom;
 BMap.Marker = Marker;
 BMap.Polygon = Polygon;
+BMap.Drawing = Drawing;
 BMap.MarkerClusterer = MarkerClusterer;
 
 export default BMap;

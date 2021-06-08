@@ -15,3 +15,7 @@ nav:
 ## 受控组件但是无中心点
 
 <code src="./demo/value.demo" />
+
+## 划分区域
+
+<code src="./demo/draw-area.demo">

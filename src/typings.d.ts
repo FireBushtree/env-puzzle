@@ -5,4 +5,5 @@ interface Window {
   BMap: any;
   BMapLib: any;
   BMAP_ANIMATION_BOUNCE: number;
+  BMAP_DRAWING_POLYGON: number;
 }

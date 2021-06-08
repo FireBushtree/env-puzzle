@@ -99,6 +99,9 @@ class InternalBMap extends React.Component<
         'https://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js',
       );
 
+      await DomUtil.loadJavascript(
+        'http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js',
+      );
       // eslint-disable-next-line max-len
       window.BMap.Map.prototype.customSetMapCenter = function customSetMapCenter(
         lng: number,
