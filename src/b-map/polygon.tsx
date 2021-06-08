@@ -79,7 +79,7 @@ const Polygon: React.FC<PolygonProps> = (props: PolygonProps) => {
     return () => {
       map.removeOverlay(hole);
     };
-  }, []);
+  }, [boundaries]);
 
   return <div />;
 };
