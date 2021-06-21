@@ -12,6 +12,11 @@ const DEFAULT_PAGINATION = {
   pageSize: 10,
 };
 
+/**
+ * 列表展示的风格
+ */
+export type TemplateTheme = 'card' | 'list';
+
 export interface TemplatePagination {
   total: number;
   current: number;
@@ -97,7 +102,7 @@ class Template<F, T extends object = any> extends Component<
    * 初始化columns, 给每个column加上是否显示的属性
    */
   setSelfColumns() {
-    const {tableProps = {}} = this.props;
+    const {tableProps = {} as TableProps<T>} = this.props;
     const {columns = []} = tableProps;
 
     this.setState({
@@ -186,7 +191,11 @@ class Template<F, T extends object = any> extends Component<
       selectedRowKeys,
     } = this.state;
 
-    const {tableProps = {}, actionProps, children} = this.props;
+    const {
+      tableProps = {} as TableProps<T>,
+      actionProps,
+      children,
+    } = this.props;
     const {
       // eslint-disable-next-line no-unused-vars
       columns,

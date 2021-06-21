@@ -21,6 +21,7 @@ module.exports = {
     expect: true,
   },
   rules: {
+    'react/display-name': [0],
     'linebreak-style': [0],
     'require-jsdoc': [0],
     'react/prop-types': [0],

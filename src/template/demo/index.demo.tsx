@@ -15,6 +15,14 @@ export interface Student {
   studentId: string;
 }
 
+const {Card} = Template;
+
+const Student: React.FC<Student> = (props) => {
+  return <Card title={props.name} />;
+};
+
+Student.displayName = 'Student';
+
 const TemplateDemo: React.FC = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [showView, setShowView] = useState(false);
@@ -26,6 +34,8 @@ const TemplateDemo: React.FC = () => {
     <>
       <Template<any, Student>
         tableProps={{
+          renderCard: (item) => <Student {...item} />,
+          theme: 'card',
           selectable: true,
           columns: [
             {
@@ -85,7 +95,6 @@ const TemplateDemo: React.FC = () => {
           uploadUrl: '/cloud/tjdx/prd/web/api/trashFeatureIndicator/import',
         }}
         getDataSource={(pagination, filter) => {
-          console.log(pagination);
           return new Promise((resolve, reject) => {
             resolve({
               total: 100,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSize} from 'ahooks';
 import classnames from 'classnames';
-import {Table as AntTable, Pagination, Modal} from 'antd';
+import {Table as AntTable, Pagination, Modal, Row, Col} from 'antd';
 import {
   TablePaginationConfig,
   TableProps as AntTableProps,
@@ -10,24 +10,39 @@ import {
 } from 'antd/lib/table';
 import {Button, Popover, List} from 'antd';
 import {DownOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
+import {TemplateTheme} from './template';
 
 export interface ActionButton<T> {
   name: string;
   onClick?: (text: string, record: T, index: number) => any;
 }
 
+export interface CardActionButton<T> {
+  name: string;
+  onClick?: (record: T) => any;
+}
+
+export type RenderCardButtons<T> =
+  | CardActionButton<T>
+  | Array<CardActionButton<T>>
+  | ((row: T) => CardActionButton<T> | Array<CardActionButton<T>>);
+
+export type RenderButtons<T> =
+  | ActionButton<T>
+  | Array<ActionButton<T>>
+  | ((row: T) => ActionButton<T> | Array<ActionButton<T>>);
+
 export type TableColumnType<T> = ((ColumnGroupType<T> | ColumnType<T>) & {
   isShow?: boolean;
-  renderButtons?:
-    | ActionButton<T>
-    | Array<ActionButton<T>>
-    | ((row: T) => ActionButton<T> | Array<ActionButton<T>>);
+  renderButtons?: RenderButtons<T>;
 })[];
 
 export interface TableProps<T> extends Omit<AntTableProps<T>, 'columns'> {
   hasIndex?: boolean;
   selectable?: boolean;
   columns?: TableColumnType<T>;
+  theme?: TemplateTheme;
+  renderCard?: (data: T) => React.ReactNode;
 }
 
 function handleActionButtonClick<T>(
@@ -54,7 +69,15 @@ function handleActionButtonClick<T>(
 }
 
 function Table<T extends object = any>(props: TableProps<T>) {
-  const {className, pagination, dataSource, columns, ...rest} = props;
+  const {
+    className,
+    pagination,
+    dataSource,
+    columns,
+    theme,
+    renderCard,
+    ...rest
+  } = props;
   const wrapRef = React.useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = React.useState(0);
 
@@ -159,16 +182,34 @@ function Table<T extends object = any>(props: TableProps<T>) {
     };
   });
 
+  const isCardTheme = theme === 'card';
+  const isListTheme = theme === 'list';
+
   return (
     <div ref={wrapRef} className="env-template-table-wrap">
-      <AntTable
-        columns={columns?.filter((item) => item.isShow)}
-        dataSource={dataSource}
-        className={classnames(className, 'env-template-table')}
-        scroll={scrollY ? {y: scrollY} : {}}
-        {...rest}
-        pagination={false}
-      />
+      {isListTheme && (
+        <AntTable
+          columns={columns?.filter((item) => item.isShow)}
+          dataSource={dataSource}
+          className={classnames(className, 'env-template-table')}
+          scroll={scrollY ? {y: scrollY} : {}}
+          {...rest}
+          pagination={false}
+        />
+      )}
+
+      {isCardTheme && (
+        <div className="env-template-card-wrap">
+          <Row>
+            {dataSource.map((item, index) => (
+              <Col span={4} key={index}>
+                {renderCard && renderCard(item)}
+              </Col>
+            ))}
+          </Row>
+        </div>
+      )}
+
       <div className="env-template-table-pagination">
         <div className="env-template-table-total-number">总共{total}条记录</div>
         <Pagination
@@ -183,3 +224,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
 }
 
 export default Table;
+
+Table.defaultProps = {
+  theme: 'list',
+};

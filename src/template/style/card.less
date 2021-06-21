@@ -1,0 +1,73 @@
+.env-template-card {
+  background: #FFFFFF;
+  box-shadow: 0px 6px 20px 0px rgba(191, 191, 191, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+
+  &-header {
+    padding: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    color: #1890FF;
+
+    &-title {
+      font-size: 16px;
+      flex: 1;
+    }
+  }
+
+  &-body {
+    padding: 0 12px;
+  }
+
+  &-footer {
+    height: 66px;
+    position: relative;
+
+    &-box {
+      position: absolute;
+      right: 12px;
+      top: 20px;
+      width: 30px;
+      height: 30px;
+      background: #1890FF;
+      box-shadow: 0px 4px 10px 0px rgba(191, 191, 191, 0.3);
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      transition: all 0.3s;
+
+      &:hover {
+        height: 46px;
+        width: 100%;
+        right: 0;
+
+        .env-template-card-footer-point {
+          display: none;
+        }
+
+        .env-template-card-footer-button {
+          position: relative;
+          opacity: 1;
+        }
+      }
+    }
+
+    &-point {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FFFFFF;
+    }
+
+    &-button {
+      position: absolute;
+      opacity: 0;
+      color: #FFF;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+  }
+}
