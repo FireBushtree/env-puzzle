@@ -11,8 +11,9 @@ import {cloneDeep} from 'lodash';
 import {TableColumnType} from './table';
 import Icon from './icon';
 import ImportModal from '../import-modal';
+import {IsCardTheme} from './interface';
 
-export interface ActionProps<F, T> {
+export interface ActionProps<F, T> extends IsCardTheme {
   onCreate?: () => any;
   onDelete?: (selectRows: Array<T>) => any;
   onExport?: (
@@ -41,6 +42,10 @@ export interface ActionProps<F, T> {
   selectable?: boolean;
   selectRows?: Array<T>;
   setColumns: (columns: TableColumnType<T>) => any;
+  onSelectedRows: (
+    selectedRowKeys: Array<React.Key>,
+    selectedRows: Array<T>,
+  ) => any;
 }
 
 function Action<F, T extends object = any>(props: ActionProps<F, T>) {
@@ -62,9 +67,15 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
     selectRows,
     filter,
     dataSource,
+    isListTheme,
+    isCardTheme,
+    onSelectedRows,
   } = props;
 
   const [showImport, setShowImport] = useState(false);
+  // const [] = useState();
+  const checkAllIndeterminate
+    = selectRows.length > 0 && selectRows.length < dataSource.length;
 
   const talbeColumnMenus = (
     <Menu>
@@ -190,16 +201,39 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
       </div>
 
       <div className="env-template-action-right">
-        <Popover
-          overlayClassName="env-template-action-popover"
-          title="隐藏显示列"
-          content={talbeColumnMenus}
-        >
+        {isListTheme && (
+          <Popover
+            overlayClassName="env-template-action-popover"
+            title="隐藏显示列"
+            content={talbeColumnMenus}
+          >
+            <Button className="env-template-action-btn__table">
+              <Icon name="icon-ai238" />
+              <CaretDownOutlined />
+            </Button>
+          </Popover>
+        )}
+
+        {isCardTheme && (
           <Button className="env-template-action-btn__table">
-            <Icon name="icon-ai238" />
-            <CaretDownOutlined />
+            <Checkbox
+              checked={selectRows.length === dataSource.length}
+              indeterminate={checkAllIndeterminate}
+              onChange={(e) => {
+                const {checked} = e.target;
+
+                if (checked) {
+                  const keys = dataSource.map((item, index) => index);
+                  onSelectedRows(keys, dataSource);
+                } else {
+                  onSelectedRows([], []);
+                }
+              }}
+            >
+              全选
+            </Checkbox>
           </Button>
-        </Popover>
+        )}
 
         {exportBtn && (
           <Popover

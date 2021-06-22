@@ -11,6 +11,7 @@ import {
 import {Button, Popover, List} from 'antd';
 import {DownOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {TemplateTheme} from './template';
+import {IsCardTheme} from './interface';
 
 export interface ActionButton<T> {
   name: string;
@@ -37,12 +38,14 @@ export type TableColumnType<T> = ((ColumnGroupType<T> | ColumnType<T>) & {
   renderButtons?: RenderButtons<T>;
 })[];
 
-export interface TableProps<T> extends Omit<AntTableProps<T>, 'columns'> {
+export interface TableProps<T>
+  extends Omit<AntTableProps<T>, 'columns'>,
+    IsCardTheme {
   hasIndex?: boolean;
   selectable?: boolean;
   columns?: TableColumnType<T>;
   theme?: TemplateTheme;
-  renderCard?: (data: T) => React.ReactNode;
+  renderCard?: (data: T, index: number) => JSX.Element;
 }
 
 function handleActionButtonClick<T>(
@@ -76,6 +79,8 @@ function Table<T extends object = any>(props: TableProps<T>) {
     columns,
     theme,
     renderCard,
+    isListTheme,
+    isCardTheme,
     ...rest
   } = props;
   const wrapRef = React.useRef<HTMLDivElement>(null);
@@ -101,6 +106,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
     setScrollY(tbodyHeight > y ? y : 0);
   }, [dataSource, size]);
 
+  // 设置 renderButtons
   columns?.forEach((item) => {
     const {renderButtons} = item;
 
@@ -182,8 +188,57 @@ function Table<T extends object = any>(props: TableProps<T>) {
     };
   });
 
-  const isCardTheme = theme === 'card';
-  const isListTheme = theme === 'list';
+  /**
+   * 设置卡片组件
+   * 自动给卡片组件注入`record`, `index`属性
+   * @param {T} record
+   * @param {number} index
+   * @return {React.FunctionComponentElement}
+   */
+  const renderCardComponent = (record: T, index: number) => {
+    if (!renderCard) {
+      return null;
+    }
+
+    const {rowSelection} = rest;
+    const {selectedRowKeys, onChange} = rowSelection;
+    const cardComponent = renderCard(record, index);
+    const propsCardComponent = React.cloneElement(cardComponent, {
+      data: record,
+      index,
+      selectable: !!rowSelection,
+      checked: selectedRowKeys.includes(index),
+      onCheck: (value, index) => {
+        if (!rest.rowSelection) {
+          return;
+        }
+
+        const copySelectedRowKeys = [...selectedRowKeys];
+
+        // 选择了某个卡片
+        if (value) {
+          copySelectedRowKeys.push(index);
+        } else {
+          // 取消选择了某个卡片
+          const targetIndex = copySelectedRowKeys.findIndex(
+            (item) => item === index,
+          );
+          copySelectedRowKeys.splice(targetIndex, 1);
+        }
+
+        const selectedRows: Array<T> = [];
+        copySelectedRowKeys.sort();
+        copySelectedRowKeys.forEach((item) => {
+          const target = dataSource[item];
+          selectedRows.push(target);
+        });
+
+        onChange && onChange(copySelectedRowKeys, selectedRows);
+      },
+    });
+
+    return propsCardComponent;
+  };
 
   return (
     <div ref={wrapRef} className="env-template-table-wrap">
@@ -200,13 +255,15 @@ function Table<T extends object = any>(props: TableProps<T>) {
 
       {isCardTheme && (
         <div className="env-template-card-wrap">
-          <Row>
+          <ul className="env-template-card-list">
             {dataSource.map((item, index) => (
-              <Col span={4} key={index}>
-                {renderCard && renderCard(item)}
-              </Col>
+              <li key={index} className="env-template-card-item">
+                <div className="env-template-card-container">
+                  {renderCardComponent(item, index)}
+                </div>
+              </li>
             ))}
-          </Row>
+          </ul>
         </div>
       )}
 

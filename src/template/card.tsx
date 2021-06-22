@@ -4,13 +4,26 @@ import {CardActionButton, RenderCardButtons} from './table';
 
 export interface CardProps<T> {
   data?: T;
+  index?: number;
+  checked?: boolean;
+  selectable?: boolean;
+  onCheck?: (value: boolean, index: number) => any;
   title?: React.ReactNode;
   renderButtons?: RenderCardButtons<T>;
   children?: React.ReactNode;
 }
 
 function Card<T extends object = any>(props: CardProps<T>) {
-  const {title, children, renderButtons, data} = props;
+  const {
+    title,
+    children,
+    renderButtons,
+    checked,
+    data,
+    selectable,
+    onCheck,
+    index,
+  } = props;
 
   let buttons: CardActionButton<T> | Array<CardActionButton<T>>;
 
@@ -25,13 +38,22 @@ function Card<T extends object = any>(props: CardProps<T>) {
     buttons = [buttons];
   }
 
+  const cardButtons = buttons as Array<CardActionButton<T>>;
+
   return (
     <div className="env-template-card">
       <div className="env-template-card-header">
         <div className="env-template-card-header-title">{title}</div>
-        <div className="env-template-card-header-select">
-          <Checkbox />
-        </div>
+        {selectable && (
+          <div className="env-template-card-header-select">
+            <Checkbox
+              checked={checked}
+              onChange={(e) => {
+                onCheck && onCheck(e.target.checked, index);
+              }}
+            />
+          </div>
+        )}
       </div>
       <div className="env-template-card-body">{children}</div>
       <div className="env-template-card-footer">
@@ -40,7 +62,7 @@ function Card<T extends object = any>(props: CardProps<T>) {
           <span className="env-template-card-footer-point"></span>
           <span className="env-template-card-footer-point"></span>
 
-          {/* {buttons.map((item, index) => (
+          {cardButtons.map((item, index) => (
             <span
               key={index}
               className="env-template-card-footer-button"
@@ -50,7 +72,7 @@ function Card<T extends object = any>(props: CardProps<T>) {
             >
               {item.name}
             </span>
-          ))} */}
+          ))}
         </div>
       </div>
     </div>

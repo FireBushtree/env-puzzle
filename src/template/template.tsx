@@ -202,10 +202,14 @@ class Template<F, T extends object = any> extends Component<
       hasIndex,
       selectable,
       rowSelection,
+      theme,
       ...tableRestProps
     } = tableProps;
 
     const columnsToShow = selfColumns.filter((item) => item.isShow);
+
+    const isCardTheme = theme === 'card';
+    const isListTheme = theme === 'list';
 
     // TODO: 这个地方写的不好
     // 给selfColumns补充`序号列`， 利用了react不会变动state的特性。
@@ -243,9 +247,17 @@ class Template<F, T extends object = any> extends Component<
             filter={filter}
             selectable={selectable}
             selectRows={selectedRows}
+            isCardTheme={isCardTheme}
+            isListTheme={isListTheme}
             columns={selfColumns}
             setColumns={(columns) => {
               this.setState({selfColumns: columns});
+            }}
+            onSelectedRows={(selectedRowKeys, selectedRows) => {
+              this.setState({
+                selectedRowKeys,
+                selectedRows,
+              });
             }}
           />
 
@@ -257,6 +269,9 @@ class Template<F, T extends object = any> extends Component<
 
         <div className="env-template__table">
           <Table
+            isCardTheme={isCardTheme}
+            isListTheme={isListTheme}
+            theme={theme}
             loading={loading}
             rowSelection={
               selectable

@@ -6,6 +6,7 @@ import moment from 'moment';
 // @ts-ignore
 import {CreateModalControl} from 'env-puzzle/lib/create-modal';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
+import {mockRows} from './mockRows';
 
 export interface Student {
   id: number;
@@ -17,12 +18,6 @@ export interface Student {
 
 const {Card} = Template;
 
-const Student: React.FC<Student> = (props) => {
-  return <Card title={props.name} />;
-};
-
-Student.displayName = 'Student';
-
 const TemplateDemo: React.FC = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [showView, setShowView] = useState(false);
@@ -30,11 +25,29 @@ const TemplateDemo: React.FC = () => {
   const [currentStudent, setCurrentStudent] = useState<Student>();
   const [isDog, setIsDog] = useState(false);
 
+  const renderCard = (item: Student) => (
+    <Card
+      title={item.name}
+      renderButtons={[
+        {name: '查看'},
+        {name: '删除'},
+        {name: '编辑'},
+        {name: '派发'},
+      ]}
+    >
+      <Card.Field label="常住户数/开卡数">1000 / 897</Card.Field>
+      <Card.Field label="分类类型">省级高标准</Card.Field>
+      <Card.Field label="运营单位">浙江我很帅公司</Card.Field>
+      <Card.Field label="投放点数">20</Card.Field>
+      <Card.Field label="智能设备数量">40</Card.Field>
+    </Card>
+  );
+
   return (
     <>
       <Template<any, Student>
         tableProps={{
-          renderCard: (item) => <Student {...item} />,
+          renderCard,
           theme: 'card',
           selectable: true,
           columns: [
@@ -98,15 +111,7 @@ const TemplateDemo: React.FC = () => {
           return new Promise((resolve, reject) => {
             resolve({
               total: 100,
-              rows: [
-                {
-                  id: 1,
-                  name: '小黑',
-                  gender: '男',
-                  classNum: '1',
-                  studentId: '555',
-                },
-              ],
+              rows: mockRows,
             });
           });
         }}
