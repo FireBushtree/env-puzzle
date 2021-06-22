@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSize} from 'ahooks';
 import classnames from 'classnames';
-import {Table as AntTable, Pagination, Modal, Row, Col} from 'antd';
+import {Table as AntTable, Pagination, Modal} from 'antd';
 import {
   TablePaginationConfig,
   TableProps as AntTableProps,

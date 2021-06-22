@@ -32,6 +32,7 @@ export interface TemplateProps<F, T> {
     | 'selectRows'
     | 'filter'
     | 'dataSource'
+    | 'onSelectedRows'
   >;
   tableProps: TableProps<T>;
   getDataSource: (

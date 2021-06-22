@@ -73,7 +73,7 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
   } = props;
 
   const [showImport, setShowImport] = useState(false);
-  // const [] = useState();
+
   const checkAllIndeterminate
     = selectRows.length > 0 && selectRows.length < dataSource.length;
 

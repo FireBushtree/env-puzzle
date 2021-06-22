@@ -8,6 +8,7 @@ const defaultActionProps = {
   columns: [],
   filter: {},
   setColumns: () => {},
+  onSelectedRows: () => {},
 };
 
 const TABLE_BTN_CLASS = '.env-template-action-btn__table';
