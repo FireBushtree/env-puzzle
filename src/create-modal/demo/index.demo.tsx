@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {CreateModal} from 'env-puzzle';
-import {Button, Input, InputNumber, Select} from 'antd';
+import {Button, DatePicker, Input, InputNumber, Select} from 'antd';
 
 const CreateModalDemo: React.FC = () => {
   const [showCreate, setShowCreate] = useState(false);
@@ -37,6 +37,8 @@ const CreateModalDemo: React.FC = () => {
         <InputNumber data-required data-label="学号" data-name="studentId" />
 
         <InputNumber data-required data-label="班级" data-name="classNum" />
+
+        <DatePicker data-required data-label="生日" data-name="birthday" />
 
         <Input.TextArea data-span={24} data-label="备注" data-name="marker" />
       </CreateModal>

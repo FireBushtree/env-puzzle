@@ -1,14 +1,17 @@
 import React from 'react';
 import {Checkbox} from 'antd';
+import classnames from 'classnames';
 import {CardActionButton, RenderCardButtons} from './table';
 
-export interface CardProps<T> {
+export interface CardProps<T>
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   data?: T;
   index?: number;
   checked?: boolean;
   selectable?: boolean;
   onCheck?: (value: boolean, index: number) => any;
   title?: React.ReactNode;
+  subTitle?: React.ReactNode;
   renderButtons?: RenderCardButtons<T>;
   children?: React.ReactNode;
 }
@@ -23,6 +26,9 @@ function Card<T extends object = any>(props: CardProps<T>) {
     selectable,
     onCheck,
     index,
+    subTitle,
+    className,
+    ...rest
   } = props;
 
   let buttons: CardActionButton<T> | Array<CardActionButton<T>>;
@@ -41,7 +47,7 @@ function Card<T extends object = any>(props: CardProps<T>) {
   const cardButtons = buttons as Array<CardActionButton<T>>;
 
   return (
-    <div className="env-template-card">
+    <div {...rest} className={classnames('env-template-card', className)}>
       <div className="env-template-card-header">
         <div className="env-template-card-header-title">{title}</div>
         {selectable && (
@@ -55,6 +61,13 @@ function Card<T extends object = any>(props: CardProps<T>) {
           </div>
         )}
       </div>
+
+      {subTitle && (
+        <div className="env-template-card-sub-title">
+          <span className="env-template-card-sub-title-inner">{subTitle}</span>
+        </div>
+      )}
+
       <div className="env-template-card-body">{children}</div>
       <div className="env-template-card-footer">
         <div className="env-template-card-footer-box">

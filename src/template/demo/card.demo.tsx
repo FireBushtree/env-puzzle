@@ -9,6 +9,7 @@ const CardDemo: React.FC = (props) => {
   const renderCard = (item: Student) => (
     <Card
       title={item.name}
+      subTitle="居民小区"
       renderButtons={[
         {name: '查看'},
         {name: '删除'},
