@@ -1,7 +1,10 @@
 import React from 'react';
 import {Col, Input, Tooltip, Checkbox, InputNumber, Form} from 'antd';
 
-export const renderFieldItem = (reactNode: React.ReactNode) => {
+export const renderFieldItem = (
+  reactNode: React.ReactNode,
+  parentNode?: React.ReactNode,
+) => {
   return React.Children.map(reactNode, (child: React.ReactElement, index) => {
     if (
       child === null
@@ -46,7 +49,7 @@ export const renderFieldItem = (reactNode: React.ReactNode) => {
         return React.cloneElement(
           child,
           {},
-          renderFieldItem(child.props.children),
+          renderFieldItem(child.props.children, child),
         );
       }
       return child;
@@ -71,16 +74,24 @@ export const renderFieldItem = (reactNode: React.ReactNode) => {
     }
     const valuePropName = type === Checkbox ? 'checked' : 'value';
 
+    const formNode = (
+      <Form.Item
+        valuePropName={valuePropName}
+        label={<Tooltip title={label}>{label}</Tooltip>}
+        name={name}
+        rules={rules}
+      >
+        {child}
+      </Form.Item>
+    );
+
+    if (parentNode) {
+      return formNode;
+    }
+
     return (
       <Col key={index} span={span || 12}>
-        <Form.Item
-          valuePropName={valuePropName}
-          label={<Tooltip title={label}>{label}</Tooltip>}
-          name={name}
-          rules={rules}
-        >
-          {child}
-        </Form.Item>
+        {formNode}
       </Col>
     );
   });

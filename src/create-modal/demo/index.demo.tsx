@@ -50,6 +50,20 @@ const CreateModalDemo: React.FC = () => {
         <Input.TextArea data-span={24} data-label="备注" data-name="marker" />
 
         <Col span={12}>
+          <div>
+            <div>
+              <div>
+                <Input
+                  data-required
+                  data-label="家长姓名"
+                  data-name="parentName"
+                />
+              </div>
+            </div>
+          </div>
+        </Col>
+
+        <Col span={12}>
           <Row>
             <Col span={16}>
               <Input
@@ -70,6 +84,7 @@ const CreateModalDemo: React.FC = () => {
                         longitudeDone: value.lng,
                         latitudeDone: value.lat,
                         address: res.address,
+                        parentName: '囧',
                       });
                   });
                 }}
