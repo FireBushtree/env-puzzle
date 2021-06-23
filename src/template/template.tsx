@@ -203,7 +203,7 @@ class Template<F, T extends object = any> extends Component<
       hasIndex,
       selectable,
       rowSelection,
-      theme,
+      theme = 'list',
       ...tableRestProps
     } = tableProps;
 

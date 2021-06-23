@@ -16,8 +16,6 @@ export interface Student {
   studentId: string;
 }
 
-const {Card} = Template;
-
 const TemplateDemo: React.FC = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [showView, setShowView] = useState(false);
@@ -25,30 +23,10 @@ const TemplateDemo: React.FC = () => {
   const [currentStudent, setCurrentStudent] = useState<Student>();
   const [isDog, setIsDog] = useState(false);
 
-  const renderCard = (item: Student) => (
-    <Card
-      title={item.name}
-      renderButtons={[
-        {name: '查看'},
-        {name: '删除'},
-        {name: '编辑'},
-        {name: '派发'},
-      ]}
-    >
-      <Card.Field label="常住户数/开卡数">1000 / 897</Card.Field>
-      <Card.Field label="分类类型">省级高标准</Card.Field>
-      <Card.Field label="运营单位">浙江我很帅公司</Card.Field>
-      <Card.Field label="投放点数">20</Card.Field>
-      <Card.Field label="智能设备数量">40</Card.Field>
-    </Card>
-  );
-
   return (
     <>
       <Template<any, Student>
         tableProps={{
-          renderCard,
-          theme: 'card',
           selectable: true,
           columns: [
             {

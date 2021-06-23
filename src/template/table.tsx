@@ -201,40 +201,48 @@ function Table<T extends object = any>(props: TableProps<T>) {
     }
 
     const {rowSelection} = rest;
-    const {selectedRowKeys, onChange} = rowSelection;
+    let selectProps = {};
+
+    if (!!rowSelection) {
+      const {selectedRowKeys, onChange} = rowSelection;
+      selectProps = {
+        checked: selectedRowKeys.includes(index),
+        onCheck: (value, index) => {
+          if (!rest.rowSelection) {
+            return;
+          }
+
+          const copySelectedRowKeys = [...selectedRowKeys];
+
+          // 选择了某个卡片
+          if (value) {
+            copySelectedRowKeys.push(index);
+          } else {
+            // 取消选择了某个卡片
+            const targetIndex = copySelectedRowKeys.findIndex(
+              (item) => item === index,
+            );
+            copySelectedRowKeys.splice(targetIndex, 1);
+          }
+
+          const selectedRows: Array<T> = [];
+          copySelectedRowKeys.sort();
+          copySelectedRowKeys.forEach((item) => {
+            const target = dataSource[item];
+            selectedRows.push(target);
+          });
+
+          onChange && onChange(copySelectedRowKeys, selectedRows);
+        },
+      };
+    }
+
     const cardComponent = renderCard(record, index);
     const propsCardComponent = React.cloneElement(cardComponent, {
       data: record,
       index,
       selectable: !!rowSelection,
-      checked: selectedRowKeys.includes(index),
-      onCheck: (value, index) => {
-        if (!rest.rowSelection) {
-          return;
-        }
-
-        const copySelectedRowKeys = [...selectedRowKeys];
-
-        // 选择了某个卡片
-        if (value) {
-          copySelectedRowKeys.push(index);
-        } else {
-          // 取消选择了某个卡片
-          const targetIndex = copySelectedRowKeys.findIndex(
-            (item) => item === index,
-          );
-          copySelectedRowKeys.splice(targetIndex, 1);
-        }
-
-        const selectedRows: Array<T> = [];
-        copySelectedRowKeys.sort();
-        copySelectedRowKeys.forEach((item) => {
-          const target = dataSource[item];
-          selectedRows.push(target);
-        });
-
-        onChange && onChange(copySelectedRowKeys, selectedRows);
-      },
+      ...selectProps,
     });
 
     return propsCardComponent;

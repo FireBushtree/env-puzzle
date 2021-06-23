@@ -19,7 +19,13 @@ nav:
 
 ## 代码示例
 
+### 列表风格的查询风格
+
 <code src="./demo/index.demo" />
+
+### 卡片风格的查询风格
+
+<code src="./demo/card.demo" />
 
 ## api
 
