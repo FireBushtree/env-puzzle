@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSize} from 'ahooks';
 import classnames from 'classnames';
-import {Table as AntTable, Pagination, Modal} from 'antd';
+import {Table as AntTable, Pagination, Modal, Empty} from 'antd';
 import {
   TablePaginationConfig,
   TableProps as AntTableProps,
@@ -263,15 +263,19 @@ function Table<T extends object = any>(props: TableProps<T>) {
 
       {isCardTheme && (
         <div className="env-template-card-wrap">
-          <ul className="env-template-card-list">
-            {dataSource.map((item, index) => (
-              <li key={index} className="env-template-card-item">
-                <div className="env-template-card-container">
-                  {renderCardComponent(item, index)}
-                </div>
-              </li>
-            ))}
-          </ul>
+          {dataSource.length === 0 ? (
+            <Empty className="env-template-card-list-empty" />
+          ) : (
+            <ul className="env-template-card-list">
+              {dataSource.map((item, index) => (
+                <li key={index} className="env-template-card-item">
+                  <div className="env-template-card-container">
+                    {renderCardComponent(item, index)}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 

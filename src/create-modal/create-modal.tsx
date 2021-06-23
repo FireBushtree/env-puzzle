@@ -28,16 +28,6 @@ const CreateModal: React.ForwardRefRenderFunction<
     form,
   }));
 
-  const renderFields = () => {
-    const childArray: Array<React.ReactNode> = [];
-
-    React.Children.forEach(children, (item) => {
-      childArray.push(item);
-    });
-
-    return childArray.map((item, index) => renderFieldItem(item, index));
-  };
-
   const handleSave = async () => {
     const res = await form.validateFields();
 
@@ -80,7 +70,7 @@ const CreateModal: React.ForwardRefRenderFunction<
       {...rest}
     >
       <Form ref={formRef} form={form}>
-        <Row gutter={60}>{renderFields()}</Row>
+        <Row gutter={60}>{renderFieldItem(children)}</Row>
       </Form>
     </Modal>
   );

@@ -36,7 +36,7 @@ const CardDemo: React.FC = (props) => {
         return new Promise((resolve, reject) => {
           resolve({
             total: 100,
-            rows: mockRows,
+            rows: [],
           });
         });
       }}

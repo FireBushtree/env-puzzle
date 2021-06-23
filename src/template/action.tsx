@@ -214,7 +214,7 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
           </Popover>
         )}
 
-        {isCardTheme && selectable && (
+        {isCardTheme && selectable && dataSource.length > 0 && (
           <Button className="env-template-action-btn__table">
             <Checkbox
               checked={selectRows.length === dataSource.length}
