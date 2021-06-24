@@ -34,10 +34,12 @@ const CardDemo: React.FC = (props) => {
       }}
       getDataSource={(pagination, filter) => {
         return new Promise((resolve, reject) => {
-          resolve({
-            total: mockRows.length,
-            rows: mockRows,
-          });
+          setTimeout(() => {
+            resolve({
+              total: mockRows.length,
+              rows: mockRows,
+            });
+          }, 1000);
         });
       }}
     >

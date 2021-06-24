@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSize} from 'ahooks';
 import classnames from 'classnames';
-import {Table as AntTable, Pagination, Modal, Empty} from 'antd';
+import {Table as AntTable, Pagination, Modal, Empty, Spin} from 'antd';
 import {
   TablePaginationConfig,
   TableProps as AntTableProps,
@@ -81,6 +81,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
     renderCard,
     isListTheme,
     isCardTheme,
+    loading,
     ...rest
   } = props;
   const wrapRef = React.useRef<HTMLDivElement>(null);
@@ -252,6 +253,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
     <div ref={wrapRef} className="env-template-table-wrap">
       {isListTheme && (
         <AntTable
+          loading={loading}
           columns={columns?.filter((item) => item.isShow)}
           dataSource={dataSource}
           className={classnames(className, 'env-template-table')}
@@ -263,19 +265,21 @@ function Table<T extends object = any>(props: TableProps<T>) {
 
       {isCardTheme && (
         <div className="env-template-card-wrap">
-          {dataSource.length === 0 ? (
-            <Empty className="env-template-card-list-empty" />
-          ) : (
-            <ul className="env-template-card-list">
-              {dataSource.map((item, index) => (
-                <li key={index} className="env-template-card-item">
-                  <div className="env-template-card-container">
-                    {renderCardComponent(item, index)}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+          <Spin spinning={loading as boolean}>
+            {dataSource.length === 0 ? (
+              <Empty className="env-template-card-list-empty" />
+            ) : (
+              <ul className="env-template-card-list">
+                {dataSource.map((item, index) => (
+                  <li key={index} className="env-template-card-item">
+                    <div className="env-template-card-container">
+                      {renderCardComponent(item, index)}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Spin>
         </div>
       )}
 

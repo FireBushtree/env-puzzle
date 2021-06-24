@@ -46,6 +46,14 @@ const ViewModal: React.FC<ViewModalProps> = (props) => {
       // form列 默认为12
       const span = props['data-span'];
 
+      if (!label) {
+        return (
+          <Col className="env-view-modal-col" key={index} span={span || 24}>
+            {item}
+          </Col>
+        );
+      }
+
       return (
         <Col className="env-view-modal-col" key={label} span={span || 12}>
           <Tooltip title={label}>
