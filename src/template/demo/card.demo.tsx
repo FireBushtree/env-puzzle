@@ -1,6 +1,5 @@
 import React from 'react';
 import {Template} from 'env-puzzle';
-import {mockRows} from './mockRows';
 import {Student} from './index.demo';
 import {Input} from 'antd';
 const {Card} = Template;
@@ -35,7 +34,7 @@ const CardDemo: React.FC = (props) => {
       getDataSource={(pagination, filter) => {
         return new Promise((resolve, reject) => {
           resolve({
-            total: 100,
+            total: 0,
             rows: [],
           });
         });

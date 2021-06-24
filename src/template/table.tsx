@@ -281,12 +281,14 @@ function Table<T extends object = any>(props: TableProps<T>) {
 
       <div className="env-template-table-pagination">
         <div className="env-template-table-total-number">总共{total}条记录</div>
-        <Pagination
-          showQuickJumper
-          total={total}
-          pageSize={pageSize}
-          {...restPagination}
-        />
+        {total !== 0 && (
+          <Pagination
+            showQuickJumper
+            total={total}
+            pageSize={pageSize}
+            {...restPagination}
+          />
+        )}
       </div>
     </div>
   );

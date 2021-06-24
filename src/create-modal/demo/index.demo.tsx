@@ -1,8 +1,10 @@
 import React, {useRef, useState} from 'react';
 import {CreateModal, ToMap} from 'env-puzzle';
 import {Button, Col, DatePicker, Input, InputNumber, Row, Select} from 'antd';
-import {ToMapControl} from 'lib/to-map/to-map';
-import {CreateModalControl} from 'lib/create-modal';
+// @ts-ignore
+import {ToMapControl} from '@/src/to-map/to-map';
+// @ts-ignore
+import {CreateModalControl} from '../create-modal';
 
 const CreateModalDemo: React.FC = () => {
   const [showCreate, setShowCreate] = useState(false);
@@ -50,17 +52,7 @@ const CreateModalDemo: React.FC = () => {
         <Input.TextArea data-span={24} data-label="备注" data-name="marker" />
 
         <Col span={12}>
-          <div>
-            <div>
-              <div>
-                <Input
-                  data-required
-                  data-label="家长姓名"
-                  data-name="parentName"
-                />
-              </div>
-            </div>
-          </div>
+          <Input data-required data-label="家长姓名" data-name="parentName" />
         </Col>
 
         <Col span={12}>
