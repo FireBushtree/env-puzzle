@@ -1,7 +1,8 @@
 import React from 'react';
-import {Checkbox} from 'antd';
+import {Checkbox, Modal} from 'antd';
 import classnames from 'classnames';
 import {CardActionButton, RenderCardButtons} from './table';
+import {ExclamationCircleOutlined} from '@ant-design/icons';
 
 export interface CardProps<T>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -75,12 +76,26 @@ function Card<T extends object = any>(props: CardProps<T>) {
           <span className="env-template-card-footer-point"></span>
           <span className="env-template-card-footer-point"></span>
 
-          {cardButtons.map((item, index) => (
+          {cardButtons.map((item, buttonIndex) => (
             <span
-              key={index}
+              key={buttonIndex}
               className="env-template-card-footer-button"
               onClick={() => {
-                item.onClick && item.onClick(data);
+                if (item.name === '删除') {
+                  Modal.confirm({
+                    title: '确定删除该项吗？',
+                    icon: <ExclamationCircleOutlined />,
+                    onOk: () => {
+                      return item.onClick && item.onClick(data, index);
+                    },
+                    onCancel: () => {
+                      // nothing todo
+                    },
+                  });
+                  return;
+                }
+
+                item.onClick && item.onClick(data, index);
               }}
             >
               {item.name}

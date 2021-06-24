@@ -20,7 +20,7 @@ export interface ActionButton<T> {
 
 export interface CardActionButton<T> {
   name: string;
-  onClick?: (record: T) => any;
+  onClick?: (record: T, index?: number) => any;
 }
 
 export type RenderCardButtons<T> =
