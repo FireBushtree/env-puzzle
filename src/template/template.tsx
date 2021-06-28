@@ -39,7 +39,7 @@ export interface TemplateProps<F, T> {
     pagination: TemplatePagination,
     filter: F,
   ) => Promise<PageApiRes<T>> | PageApiRes<T>;
-  onReset: () => any;
+  onReset?: () => any;
 }
 
 export interface TemplateState<F, T> {
