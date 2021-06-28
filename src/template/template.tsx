@@ -237,7 +237,7 @@ class Template<F, T extends object = any> extends Component<
             }}
             onReset={() => {
               this.filterRef.form.resetFields();
-              onReset();
+              onReset &&onReset();
               this.updateFilter();
             }}
           >
