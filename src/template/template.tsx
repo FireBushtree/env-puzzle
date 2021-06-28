@@ -39,6 +39,7 @@ export interface TemplateProps<F, T> {
     pagination: TemplatePagination,
     filter: F,
   ) => Promise<PageApiRes<T>> | PageApiRes<T>;
+  onReset?: () => any;
 }
 
 export interface TemplateState<F, T> {
@@ -196,6 +197,7 @@ class Template<F, T extends object = any> extends Component<
       tableProps = {} as TableProps<T>,
       actionProps,
       children,
+      onReset,
     } = this.props;
     const {
       // eslint-disable-next-line no-unused-vars
@@ -211,7 +213,6 @@ class Template<F, T extends object = any> extends Component<
 
     const isCardTheme = theme === 'card';
     const isListTheme = theme === 'list';
-
     // TODO: 这个地方写的不好
     // 给selfColumns补充`序号列`， 利用了react不会变动state的特性。
     if (hasIndex) {
@@ -236,6 +237,7 @@ class Template<F, T extends object = any> extends Component<
             }}
             onReset={() => {
               this.filterRef.form.resetFields();
+              onReset &&onReset();
               this.updateFilter();
             }}
           >

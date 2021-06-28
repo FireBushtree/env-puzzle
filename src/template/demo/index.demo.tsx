@@ -93,6 +93,9 @@ const TemplateDemo: React.FC = () => {
             });
           });
         }}
+        onReset={()=>{
+          console.log('jhj');
+        }}
       >
         <Input data-name="name" data-label="姓名" />
         <Input data-name="gender" data-label="性别" />

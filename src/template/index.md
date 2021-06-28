@@ -53,6 +53,7 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | getDataSource | 获取数据项 | `function(pagination,filter)` | | |
+| onReset | 在页面更新前,重置过滤条件 | `function` | | |
 
 ### TableProps
 
