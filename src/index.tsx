@@ -11,3 +11,5 @@ export {default as Template} from './template';
 export {default as CreateModal} from './create-modal';
 export {default as ViewModal} from './view-modal';
 export {default as ImportModal} from './import-modal';
+export {default as Page} from './page';
+export {default as Menu} from './menu';

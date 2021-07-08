@@ -51,6 +51,10 @@ export default defineConfig({
           'to-map/index.md',
         ],
       },
+      {
+        title: 'SHELL',
+        children: ['page/index.md', 'menu/index.md'],
+      },
     ],
   },
   navs: [null],

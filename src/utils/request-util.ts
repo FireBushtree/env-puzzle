@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AuthUtil from './auth-util';
+import {getTenantId, getToken, getUserId} from 'envcloud-utils-params';
 
 export interface UploadFileRes {
   result: 0 | 1;
@@ -22,7 +22,7 @@ export default class RequestUtil {
       return;
     }
 
-    params = {...params, DATA_TYPE: 'page', access_token: AuthUtil.getToken()};
+    params = {...params, DATA_TYPE: 'page', access_token: getToken()};
     const name = 'downloadFileIframe';
 
     const existDownloadIframe = document.getElementsByName(name)[0];
@@ -91,11 +91,11 @@ export default class RequestUtil {
           method: 'POST',
           url: url,
           headers: {
-            access_token: AuthUtil.getToken(),
+            access_token: getToken(),
           },
           params: {
-            tenantId: AuthUtil.getTenantId(),
-            userId: AuthUtil.getUserId(),
+            tenantId: getTenantId(),
+            userId: getUserId(),
           },
           data: formData,
         })
