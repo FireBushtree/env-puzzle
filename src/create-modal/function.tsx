@@ -32,7 +32,9 @@ export const renderFieldItem = (
         </Col>
       );
     }
-
+    // 传入样式处理
+    const style = props['data-style'];
+    const className = props['data-class'];
     // 表单组件用到的props
     const required = props['data-required'];
     const label = props['data-label'];
@@ -90,7 +92,7 @@ export const renderFieldItem = (
     }
 
     return (
-      <Col key={index} span={span || 12}>
+      <Col key={index} span={span || 12} style={style} className={className}>
         {formNode}
       </Col>
     );

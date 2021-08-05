@@ -26,6 +26,7 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | extraFooter | 模态框底部的额外按钮 | `Array<React.ReactNode>` | `[]` | |
+| onReset | 清空表单后的事件 | `function` | - | |
 
 
 ## 子元素api
@@ -41,3 +42,5 @@ nav:
 | data-name | 该字段在表单中的值的键 | `string` | - | |
 | data-title | 将下面的字段分组展示， 该字段会默认充满一行 | `React.ReactNode` | - | |
 | data-rules | 该字段的额外的校验规则， 参考[antd-form](https://ant.design/components/form-cn/#components-form-demo-basic) | `Array<object>` | - | |
+| data-style | 字段样式 | `React.CSSProperties` | - | |
+| data-className | 字段className | `boolean` | - | |

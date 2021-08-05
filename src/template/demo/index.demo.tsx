@@ -77,7 +77,9 @@ const TemplateDemo: React.FC = () => {
           ],
         }}
         actionProps={{
-          moreButtons: [{name: '绑定信息', onClick: () => {}}],
+          moreButtons: [
+            {name: '批量转换经纬度', onClick: () => {}, className: 'imMoreBtn'},
+          ],
           onCreate: () => setShowCreate(true),
           onDelete: (rows) => {
             console.log(rows);

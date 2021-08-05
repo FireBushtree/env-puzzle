@@ -31,9 +31,17 @@ const CreateModalDemo: React.FC = () => {
             解绑
           </Button>,
         ]}
+        onReset={() => {
+          console.log('表单清空后');
+        }}
       >
         <div data-title="基本信息" />
-        <Input data-required data-label="姓名" data-name="username" />
+        <Input
+          data-required
+          data-label="姓名"
+          data-name="username"
+          data-class={'iamDCM'}
+        />
 
         <Select data-required data-label="年龄" data-name="age">
           {new Array(10).fill({}).map((item, index) => (
