@@ -35,6 +35,7 @@ export interface ActionProps<F, T> extends IsCardTheme {
     icon?: React.ReactNode;
     name: string;
     onClick?: () => any;
+    className?: string;
   }>;
   dataSource: Array<T>;
   columns: TableColumnType<T>;
@@ -138,7 +139,11 @@ function Action<F, T extends object = any>(props: ActionProps<F, T>) {
             }}
             key={index}
           >
-            <div className="env-template-action-more-button-item">
+            <div
+              className={
+                `env-template-action-more-button-item 
+                ${item.className}`}
+            >
               <span>{item.icon}</span>
               <span>{item.name}</span>
             </div>
