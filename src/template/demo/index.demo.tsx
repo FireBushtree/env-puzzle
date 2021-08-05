@@ -93,7 +93,7 @@ const TemplateDemo: React.FC = () => {
             });
           });
         }}
-        onReset={()=>{
+        onReset={() => {
           console.log('jhj');
         }}
       >

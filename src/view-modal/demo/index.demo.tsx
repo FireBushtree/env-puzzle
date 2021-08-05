@@ -24,9 +24,15 @@ const ViewModalDemo: React.FC = () => {
         }}
       >
         <div data-title="基本信息" />
-        <div data-label="姓名" data-key={0}>小葡萄</div>
-        <div data-label="姓名" data-key={'qwe'}>小葡萄</div>
-        <div data-label="姓名" data-key={2}>小葡萄</div>
+        <div data-label="姓名" data-key={0}>
+          小葡萄
+        </div>
+        <div data-label="姓名" data-key={'qwe'}>
+          小葡萄
+        </div>
+        <div data-label="姓名" data-key={2}>
+          小葡萄
+        </div>
         <div data-label="年龄">7个月</div>
         <div data-label="学号">32号</div>
         <div data-label="班级">一年级(15班)</div>

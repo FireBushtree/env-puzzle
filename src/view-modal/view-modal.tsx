@@ -3,7 +3,7 @@ import {ModalProps as AntdModalProps} from 'antd/lib/modal';
 import {Button, Col, Modal, Row, Tooltip} from 'antd';
 import classnames from 'classnames';
 
-export interface ViewModalProps extends AntdModalProps {};
+export interface ViewModalProps extends AntdModalProps {}
 
 const ViewModal: React.FC<ViewModalProps> = (props) => {
   const {visible, className, onCancel, children, ...rest} = props;
@@ -54,9 +54,11 @@ const ViewModal: React.FC<ViewModalProps> = (props) => {
       }
 
       return (
-        <Col className="env-view-modal-col"
-          key={ key || label }
-          span={ span || 12 }>
+        <Col
+          className="env-view-modal-col"
+          key={key || label}
+          span={span || 12}
+        >
           <Tooltip title={label}>
             <span className="env-view-modal-col-label">{label}</span>
           </Tooltip>
