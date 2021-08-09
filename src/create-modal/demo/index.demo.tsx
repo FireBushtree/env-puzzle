@@ -35,6 +35,10 @@ const CreateModalDemo: React.FC = () => {
           console.log('表单清空后');
         }}
       >
+        <Col span={12}>
+          <Button>123</Button>
+        </Col>
+
         <div data-title="基本信息" />
         <Input
           data-required

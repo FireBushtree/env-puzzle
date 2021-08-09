@@ -12,7 +12,7 @@ export const renderFieldItem = (
       || typeof child === 'boolean'
       || typeof child === 'number'
     ) {
-      return;
+      return child;
     }
 
     const {props, type} = child;
