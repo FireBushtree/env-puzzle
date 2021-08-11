@@ -53,6 +53,9 @@ const CreateModalDemo: React.FC = () => {
               {index}
             </Select.Option>
           ))}
+          <Select.Option key="longAge" value="longAge">
+            这是一个很长很长很长这是一个很长很长很长这是一个很长很长很长的选项
+          </Select.Option>
         </Select>
 
         <InputNumber data-required data-label="学号" data-name="studentId" />
