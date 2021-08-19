@@ -2,8 +2,9 @@ import * as React from 'react';
 import classnames from 'classnames';
 import {Table as AntTable} from 'antd';
 import {TableProps as AntTableProps} from 'antd/lib/table';
+import {forwardRef, useImperativeHandle} from 'react';
 
-export interface TableProps<T> extends AntTableProps<T> {
+export interface TableProps<T extends object = any> extends AntTableProps<T> {
   wrapClassName?: string;
   autoScroll?: boolean;
   onReachBottom?: (e: Event) => any;
@@ -15,14 +16,31 @@ export interface TableProps<T> extends AntTableProps<T> {
   rowSpacing?: number;
 }
 
-/**
- * @param {*} props props
- * @return {jsx.Element}
- */
-function Table<T extends object = any>(props: TableProps<T>) {
+export interface TableControl {
+  scrollToTop: () => any;
+}
+
+const Table: React.ForwardRefRenderFunction<TableControl, TableProps> = (
+  props: TableProps,
+  ref,
+) => {
   let timer: any = null;
 
   const wrapRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollToTop = () => {
+    const {current} = wrapRef;
+    const wrapper = current?.querySelector('.ant-table-body');
+    if (!wrapper) {
+      return;
+    }
+
+    wrapper.scrollTop = 0;
+  };
+
+  useImperativeHandle(ref, () => ({
+    scrollToTop,
+  }));
 
   const clearTimer = () => {
     if (timer) {
@@ -135,6 +153,6 @@ function Table<T extends object = any>(props: TableProps<T>) {
       />
     </div>
   );
-}
+};
 
-export default Table;
+export default forwardRef(Table);

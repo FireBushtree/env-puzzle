@@ -1,6 +1,10 @@
 /* eslint-disable require-jsdoc */
 import * as React from 'react';
 import {Table} from 'env-puzzle';
+import {Button} from 'antd';
+
+// @ts-ignore
+import {TableControl} from '../table';
 
 class User {
   key: number;
@@ -33,6 +37,7 @@ const TableDemo: React.FC = () => {
   let [page, setPage] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const [dataSource, setDataSource] = React.useState<Array<User>>([]);
+  const tableRef = React.useRef<TableControl>();
 
   const columns = [
     {
@@ -62,15 +67,26 @@ const TableDemo: React.FC = () => {
   }, [page]);
 
   return (
-    <Table
-      loading={loading}
-      scroll={{y: 200}}
-      columns={columns}
-      dataSource={dataSource}
-      onReachBottom={(e) => {
-        setPage(++page);
-      }}
-    />
+    <>
+      <Button
+        type="primary"
+        onClick={() => {
+          tableRef.current.scrollToTop();
+        }}
+      >
+        回到顶部
+      </Button>
+      <Table
+        ref={tableRef}
+        loading={loading}
+        scroll={{y: 200}}
+        columns={columns}
+        dataSource={dataSource}
+        onReachBottom={(e) => {
+          setPage(++page);
+        }}
+      />
+    </>
   );
 };
 
