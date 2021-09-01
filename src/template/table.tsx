@@ -82,6 +82,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
     isListTheme,
     isCardTheme,
     loading,
+    scroll,
     ...rest
   } = props;
   const wrapRef = React.useRef<HTMLDivElement>(null);
@@ -249,6 +250,12 @@ function Table<T extends object = any>(props: TableProps<T>) {
     return propsCardComponent;
   };
 
+  const scrollProp = {...scroll};
+
+  if (scrollY) {
+    scrollProp.y = scrollY;
+  }
+
   return (
     <div ref={wrapRef} className="env-template-table-wrap">
       {isListTheme && (
@@ -257,7 +264,7 @@ function Table<T extends object = any>(props: TableProps<T>) {
           columns={columns?.filter((item) => item.isShow)}
           dataSource={dataSource}
           className={classnames(className, 'env-template-table')}
-          scroll={scrollY ? {y: scrollY} : {}}
+          scroll={scrollProp}
           {...rest}
           pagination={false}
         />

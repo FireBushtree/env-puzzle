@@ -27,6 +27,7 @@ const TemplateDemo: React.FC = () => {
     <>
       <Template<any, Student>
         tableProps={{
+          scroll: {x: 2000},
           selectable: true,
           columns: [
             {
@@ -95,7 +96,7 @@ const TemplateDemo: React.FC = () => {
             });
           });
         }}
-        onReset={()=>{
+        onReset={() => {
           console.log('jhj');
         }}
       >
